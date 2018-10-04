@@ -2,36 +2,40 @@
 
 const gulp = require('gulp');
 
-gulp.task(
+gulp.task
+(
     'lint',
     () =>
     {
         const lint = require('gulp-fasttime-lint');
-        
-        const src = ['**/*.js', '!coverage/**'];
-        const options = { envs: ['node'], parserOptions: { ecmaVersion: 6 } };
-        const stream = gulp.src(src).pipe(lint(options));
+
+        const stream =
+        gulp
+        .src(['**/*.js', '!coverage/**'])
+        .pipe(lint({ envs: ['node'], parserOptions: { ecmaVersion: 6 } }));
         return stream;
     }
 );
 
-gulp.task(
+gulp.task
+(
     'test',
     () =>
     {
         const mocha = require('gulp-spawn-mocha');
-        
+
         const stream = gulp.src('test/**/*.js').pipe(mocha({ istanbul: true }));
         return stream;
     }
 );
 
-gulp.task(
+gulp.task
+(
     'default',
     callback =>
     {
         const runSequence = require('run-sequence');
-        
+
         runSequence('lint', 'test', callback);
     }
 );

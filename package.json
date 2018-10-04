@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-no-spaces-in-call-expression",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ESLint plugin to disallow spaces after the left side of a call or new expression.",
   "keywords": [
     "eslint",
@@ -25,15 +25,15 @@
     "build": "npm install && gulp"
   },
   "devDependencies": {
-    "eslint": "~3.13.1",
+    "eslint": "~5.6.1",
     "gulp": "~3.9.1",
-    "gulp-fasttime-lint": "~0.2.0",
-    "gulp-spawn-mocha": "~3.1.0",
+    "gulp-fasttime-lint": "~0.3.0",
+    "gulp-spawn-mocha": "~5.0.1",
     "istanbul": "~0.4.5",
-    "mocha": "~3.2.0",
-    "run-sequence": "~1.2.2"
+    "mocha": "~5.2.0",
+    "run-sequence": "~2.2.1"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   }
 }
