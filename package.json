@@ -1,25 +1,24 @@
 {
-  "name": "eslint-plugin-no-spaces-in-call-expression",
-  "version": "0.0.2",
-  "description": "ESLint plugin to disallow spaces after the left side of a call or new expression.",
+  "name": "eslint-plugin-fasttime-rules",
+  "version": "0.1.0",
+  "description": "ESLint plugin for fasttime rules",
   "keywords": [
     "eslint",
     "eslintplugin",
     "eslint-plugin"
   ],
   "bugs": {
-    "url": "https://github.com/fasttime/eslint-plugin-no-spaces-in-call-expression/issues"
+    "url": "https://github.com/fasttime/eslint-plugin-fasttime-rules/issues"
   },
   "license": "ISC",
   "author": "Francesco Trotta <ft@fasttime.org> (https://github.com/fasttime)",
   "files": [
-    "docs",
-    "lib"
+    "lib/*.js"
   ],
   "main": "lib",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fasttime/eslint-plugin-no-spaces-in-call-expression.git"
+    "url": "https://github.com/fasttime/eslint-plugin-fasttime-rules.git"
   },
   "scripts": {
     "build": "npm install && gulp"

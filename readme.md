@@ -1,26 +1,13 @@
-# `eslint-plugin-no-spaces-in-call-expression`
+# `eslint-plugin-fasttime-rules`
 
-[ESLint](http://eslint.org) plugin to disallow spaces after the left side of a call or new
-expression.
-
-In order to disallow spaces between a function name (or an expression evaluating to a function) and
-the parentheses that invoke it, ESLint offers the rule
-[`func-call-spacing`](http://eslint.org/docs/rules/func-call-spacing) with the option `"never"`.
-Anyway, this setting also disallows newlines and spaces around comments when they are found between
-a function name and the left parenthesis.
-
-`eslint-plugin-no-spaces-in-call-expression` provides the rule `no-spaces-in-call-expression` to
-disallow spaces in call or new expressions while still allowing newlines and comments.
-This rule was designed as a replacement for the [JSCS](http://jscs.info) rule
-[`disallowSpacesInCallExpression`](http://jscs.info/rule/disallowSpacesInCallExpression) which has a
-similar functionality.
+[ESLint](https://eslint.org) plugin for fasttime rules.
 
 ## Installation
 
-Install ESLint and `eslint-plugin-no-spaces-in-call-expression`:
+Install ESLint and `eslint-plugin-fasttime-rules`:
 
 ```
-$ npm i --save-dev eslint eslint-plugin-no-spaces-in-call-expression
+$ npm i --save-dev eslint eslint-plugin-fasttime-rules
 ```
 
 ### Note
@@ -28,35 +15,163 @@ $ npm i --save-dev eslint eslint-plugin-no-spaces-in-call-expression
 If you installed ESLint globally (using the `-g` flag) then you must also install plugins globally:
 
 ```
-$ npm i -g eslint-plugin-no-spaces-in-call-expression
+$ npm i -g eslint-plugin-fasttime-rules
 ```
 
 ## Usage
 
-Add `"no-spaces-in-call-expression"` to the plugins section of your `.eslintrc` configuration file.
+Add `"fasttime-rules"` to the plugins section of your `.eslintrc` configuration file.
 You can omit the `eslint-plugin-` prefix.
-Then configure the `no-spaces-in-call-expression` rule under the `"rules"` section.
+Then configure the rules `nice-space-before-function-paren` and `no-spaces-in-call-expression` under
+the `"rules"` section.
 
 ```json
 {
     "plugins": [
-        "no-spaces-in-call-expression"
+        "fasttime-rules"
     ],
     "rules": {
-        "no-spaces-in-call-expression/no-spaces-in-call-expression": "error"
+        "fasttime-rules/nice-space-before-function-paren": "error",
+        "fasttime-rules/no-spaces-in-call-expression": "error"
     }
 }
 ```
 
-## Rule Details
+## Rules
 
-The rule `no-spaces-in-call-expression` disallows spaces in call or new expressions while still
-allowing newlines and comments.
+### `nice-space-before-function-paren`
+
+#### Rule Details
+
+The rule `nice-space-before-function-paren` enforces consistent spacing before the opening
+parenthesis in a function definition.
+
+This is similar to using the predefined rule `space-before-function-paren` with settings
+`["error", { anonymous: "always", named: "never", asyncArrow: "always" }]`.
+The main difference lies in the way line breaks are treated.
+While the predefined rule `space-before-function-paren` considers line breaks as regular spacing
+characters, and disallows them before the opening parenthesis in a named function definition, the
+fasttime rule `nice-space-before-function-paren` always allows newlines, also when they are
+surrounded by regular whitespaces.
 
 Examples of **incorrect** code for this rule:
 
 ```js
-/* eslint no-spaces-in-call-expression/no-spaces-in-call-expression: "error" */
+/* eslint fasttime-rules/nice-space-before-function-paren: "error" */
+/* eslint-env es6 */
+
+function foo ()
+{
+    // ...
+}
+
+var bar =
+function()
+{
+    // ...
+};
+
+class Foo
+{
+    constructor ()
+    {
+        // ...
+    }
+}
+
+var foo =
+{
+    bar ()
+    {
+        // ...
+    }
+};
+
+var foo = async(a) => await a
+```
+
+Examples of **correct** code for this rule:
+
+```js
+/* eslint fasttime-rules/nice-space-before-function-paren: "error" */
+/* eslint-env es6 */
+
+function foo(arg1, arg2)
+{
+    // ...
+}
+
+function foo2
+(arg1, arg2)
+{
+    // ...
+}
+
+var bar =
+function ()
+{
+    // ...
+};
+
+class Foo
+{
+    constructor()
+    {
+        // ...
+    }
+}
+
+class Foo2
+{
+    constructor
+    ()
+    {
+        // ...
+    }
+}
+
+var foo =
+{
+    bar()
+    {
+        // ...
+    }
+};
+
+var foo2 =
+{
+    bar
+    ()
+    {
+        // ...
+    }
+};
+
+var foo = async (a) => await a
+```
+
+### `no-spaces-in-call-expression`
+
+#### Rule Details
+
+The rule `no-spaces-in-call-expression` disallows spaces in call or new expressions while still
+allowing line breaks and comments.
+
+In order to disallow spaces between a function name (or an expression evaluating to a function) and
+the parentheses that invoke it, ESLint offers the rule
+[`func-call-spacing`](https://eslint.org/docs/rules/func-call-spacing) with the option `"never"`.
+Anyway, this setting also disallows line breaks and spaces around comments when they are found
+between a function name and the left parenthesis.
+
+`eslint-plugin-fasttime-rules` provides the rule `no-spaces-in-call-expression` to disallow spaces
+in call or new expressions while still allowing line breaks and comments.
+This rule was designed as a replacement for the [JSCS](https://jscs-dev.github.io/) rule
+[`disallowSpacesInCallExpression`](https://jscs-dev.github.io/rule/disallowSpacesInCallExpression) which has a similar functionality.
+
+Examples of **incorrect** code for this rule:
+
+```js
+/* eslint fasttime-rules/no-spaces-in-call-expression: "error" */
 
 fn ();
 ```
@@ -64,7 +179,7 @@ fn ();
 Examples of **correct** code for this rule:
 
 ```js
-/* eslint no-spaces-in-call-expression/no-spaces-in-call-expression: "error" */
+/* eslint fasttime-rules/no-spaces-in-call-expression: "error" */
 
 fn();
 
@@ -81,6 +196,6 @@ fn // this is fine, too
 ();
 ```
 
-## Further Reading
+#### Further Reading
 
 * [ESLint Issue #7587](https://github.com/eslint/eslint/issues/7587)
