@@ -6,7 +6,7 @@
 
 Install ESLint and `eslint-plugin-fasttime-rules`:
 
-```
+```console
 $ npm i --save-dev eslint eslint-plugin-fasttime-rules
 ```
 
@@ -14,7 +14,7 @@ $ npm i --save-dev eslint eslint-plugin-fasttime-rules
 
 If you installed ESLint globally (using the `-g` flag) then you must also install plugins globally:
 
-```
+```console
 $ npm i -g eslint-plugin-fasttime-rules
 ```
 
