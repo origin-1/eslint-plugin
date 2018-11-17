@@ -1,13 +1,14 @@
 # `eslint-plugin-fasttime-rules`
 
-[ESLint](https://eslint.org) plugin for fasttime rules.
+[ESLint](https://eslint.org/) plugin for [fasttime](https://github.com/fasttime?tab=repositories)
+rules.
 
 ## Installation
 
 Install ESLint and `eslint-plugin-fasttime-rules`:
 
 ```console
-$ npm i --save-dev eslint eslint-plugin-fasttime-rules
+npm i --save-dev eslint eslint-plugin-fasttime-rules
 ```
 
 ### Note
@@ -15,7 +16,7 @@ $ npm i --save-dev eslint eslint-plugin-fasttime-rules
 If you installed ESLint globally (using the `-g` flag) then you must also install plugins globally:
 
 ```console
-$ npm i -g eslint-plugin-fasttime-rules
+npm i -g eslint-plugin-fasttime-rules
 ```
 
 ## Usage
@@ -46,8 +47,9 @@ the `"rules"` section.
 The rule `nice-space-before-function-paren` enforces consistent spacing before the opening
 parenthesis in a function definition.
 
-This is similar to using the predefined rule `space-before-function-paren` with settings
-`["error", { anonymous: "always", named: "never", asyncArrow: "always" }]`.
+This is similar to using the predefined rule
+[`space-before-function-paren`](https://eslint.org/docs/rules/space-before-function-paren) with
+settings `["error", { anonymous: "always", named: "never", asyncArrow: "always" }]`.
 The main difference lies in the way line breaks are treated.
 While the predefined rule `space-before-function-paren` considers line breaks as regular spacing
 characters, and disallows them before the opening parenthesis in a named function definition, the
