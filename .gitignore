@@ -1,4 +1,5 @@
 .*
+!.git*
 !/.npmrc
 /coverage
 /node_modules
