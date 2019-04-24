@@ -1,6 +1,6 @@
 'use strict';
 
-const { series, src, task } = require('gulp');
+const { series, task } = require('gulp');
 
 task
 (
@@ -14,24 +14,29 @@ task
         (
             {
                 src: ['**/*.js', '!coverage/**'],
-                envs: ['node'],
-                parserOptions: { ecmaVersion: 6 },
-            }
+                envs: 'node',
+                parserOptions: { ecmaVersion: 8 },
+            },
         );
         return stream;
-    }
+    },
 );
 
 task
 (
     'test',
-    () =>
+    callback =>
     {
-        const mocha = require('gulp-spawn-mocha');
+        const { fork } = require('child_process');
 
-        const stream = src('test/**/*.js').pipe(mocha({ istanbul: true }));
-        return stream;
-    }
+        const { resolve } = require;
+        const nycPath = resolve('nyc/bin/nyc');
+        const mochaPath = resolve('mocha/bin/mocha');
+        const cmd =
+        fork
+        (nycPath, ['--reporter=html', '--reporter=text-summary', '--', mochaPath, 'test/**/*.js']);
+        cmd.on('exit', code => callback(code && 'Test failed'));
+    },
 );
 
 task('default', series('lint', 'test'));

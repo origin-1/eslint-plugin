@@ -1,4 +1,4 @@
-# `eslint-plugin-fasttime-rules`
+# `eslint-plugin-fasttime-rules` · [![npm version][npm badge]][npm url]
 
 [ESLint](https://eslint.org/) plugin for [fasttime](https://github.com/fasttime?tab=repositories)
 rules.
@@ -201,3 +201,6 @@ fn // this is fine, too
 #### Further Reading
 
 * [ESLint Issue #7587](https://github.com/eslint/eslint/issues/7587)
+
+[npm badge]: https://badge.fury.io/js/eslint-plugin-fasttime-rules.svg
+[npm url]: https://www.npmjs.com/package/eslint-plugin-fasttime-rules
