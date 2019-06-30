@@ -1,6 +1,6 @@
 'use strict';
 
-const RuleTester = require('eslint/lib/testers/rule-tester');
+const RuleTester = require('eslint/lib/rule-tester/rule-tester');
 const plugin = require('../..');
 
 const callExprError =

@@ -1,7 +1,7 @@
 'use strict';
 
-const RuleTester = require('eslint/lib/testers/rule-tester');
-const plugin = require('../../lib');
+const RuleTester = require('eslint/lib/rule-tester/rule-tester');
+const plugin = require('../..');
 
 const ruleTester = new RuleTester();
 const rule = plugin.rules['nice-space-before-function-paren'];
