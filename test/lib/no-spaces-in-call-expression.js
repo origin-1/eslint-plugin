@@ -1,7 +1,7 @@
 'use strict';
 
 const RuleTester = require('eslint/lib/rule-tester/rule-tester');
-const plugin = require('../..');
+const rule = require('../../lib/no-spaces-in-call-expression');
 
 const callExprError =
 (line, column) =>
@@ -26,7 +26,6 @@ const newExprError =
 );
 
 const ruleTester = new RuleTester();
-const rule = plugin.rules['no-spaces-in-call-expression'];
 const test =
 {
     valid:

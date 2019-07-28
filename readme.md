@@ -52,9 +52,9 @@ This is similar to using the predefined rule
 settings `["error", { anonymous: "always", named: "never", asyncArrow: "always" }]`.
 The main difference lies in the way line breaks are treated.
 While the predefined rule `space-before-function-paren` considers line breaks as regular spacing
-characters, and disallows them before the opening parenthesis in a named function definition, the
-fasttime rule `nice-space-before-function-paren` always allows newlines, also when they are
-surrounded by regular whitespaces.
+characters, and disallows them before the opening parenthesis in a regular named function
+definition, the fasttime rule `nice-space-before-function-paren` always allows newlines, also when
+they are surrounded by regular whitespaces.
 
 Examples of **incorrect** code for this rule:
 

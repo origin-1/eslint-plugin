@@ -1,16 +1,18 @@
 'use strict';
 
-const RuleTester = require('eslint/lib/rule-tester/rule-tester');
-const plugin = require('../..');
+const RuleTester    = require('eslint/lib/rule-tester/rule-tester');
+const rule          = require('../../lib/nice-space-before-function-paren');
 
 const ruleTester = new RuleTester();
-const rule = plugin.rules['nice-space-before-function-paren'];
+const tsParser = require.resolve('@typescript-eslint/parser');
 const test =
 {
     valid:
     [
         'function foo() {}',
         'function foo\n() {}',
+        { code: 'function foo<T>() {}', parser: tsParser },
+        { code: 'function foo<T>\n() {}', parser: tsParser },
         { code: 'function * foo() {}', parserOptions: { ecmaVersion: 6 } },
         { code: 'function * foo\n() {}', parserOptions: { ecmaVersion: 6 } },
         { code: 'async function foo() {}', parserOptions: { ecmaVersion: 8 } },
@@ -28,6 +30,8 @@ const test =
         { code: 'class Foo { constructor() {} * method() {} }', parserOptions: { ecmaVersion: 6 } },
 
         'var foo = function () {};',
+        { code: 'var foo = function <T>() {};', parser: tsParser },
+        { code: 'var foo = function <T>\n() {};', parser: tsParser },
         { code: 'var foo = function * () {};', parserOptions: { ecmaVersion: 6 } },
         { code: 'var foo = async function () {};', parserOptions: { ecmaVersion: 8 } },
 
@@ -61,6 +65,20 @@ const test =
                     message: 'Unexpected space before function parentheses.',
                     line: 1,
                     column: 13,
+                },
+            ],
+        },
+        {
+            code: 'function foo<T> () {}',
+            parser: tsParser,
+            output: 'function foo<T>() {}',
+            errors:
+            [
+                {
+                    type: 'FunctionDeclaration',
+                    message: 'Unexpected space before function parentheses.',
+                    line: 1,
+                    column: 16,
                 },
             ],
         },
@@ -197,6 +215,20 @@ const test =
                     message: 'Missing space before function parentheses.',
                     line: 1,
                     column: 19,
+                },
+            ],
+        },
+        {
+            code: 'var foo = function<T> () {};',
+            parser: tsParser,
+            output: 'var foo = function<T>() {};',
+            errors:
+            [
+                {
+                    type: 'FunctionExpression',
+                    message: 'Unexpected space before function parentheses.',
+                    line: 1,
+                    column: 22,
                 },
             ],
         },

@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-fasttime-rules",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "ESLint plugin for fasttime rules",
   "keywords": [
     "eslint",
@@ -27,10 +27,11 @@
     "build": "npm install && gulp"
   },
   "devDependencies": {
-    "eslint": "~6.0.1",
+    "@typescript-eslint/parser": "~1.13.0",
+    "eslint": "~6.1.0",
     "gulp": "~4.0.2",
-    "gulp-fasttime-lint": "~0.11.0",
-    "mocha": "~6.1.4",
+    "gulp-fasttime-lint": "~0.13.1",
+    "mocha": "~6.2.0",
     "nyc": "~14.1.1"
   },
   "peerDependencies": {
