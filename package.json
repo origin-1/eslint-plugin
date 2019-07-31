@@ -30,7 +30,7 @@
     "@typescript-eslint/parser": "~1.13.0",
     "eslint": "~6.1.0",
     "gulp": "~4.0.2",
-    "gulp-fasttime-lint": "~0.13.1",
+    "gulp-fasttime-lint": "~0.14.0",
     "mocha": "~6.2.0",
     "nyc": "~14.1.1"
   },

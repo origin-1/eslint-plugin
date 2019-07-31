@@ -32,9 +32,16 @@ task
         const { resolve } = require;
         const nycPath = resolve('nyc/bin/nyc');
         const mochaPath = resolve('mocha/bin/mocha');
-        const childProcess =
-        fork
-        (nycPath, ['--reporter=html', '--reporter=text-summary', '--', mochaPath, 'test/**/*.js']);
+        const forkArgs =
+        [
+            '--reporter=html',
+            '--reporter=text-summary',
+            '--',
+            mochaPath,
+            '--check-leaks',
+            'test/**/*.js',
+        ];
+        const childProcess = fork(nycPath, forkArgs);
         childProcess.on('exit', code => callback(code && 'Test failed'));
     },
 );
