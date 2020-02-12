@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-fasttime-rules",
+  "name": "@fasttime/eslint-plugin",
   "version": "0.3.0",
   "description": "ESLint plugin for fasttime rules",
   "keywords": [
@@ -12,7 +12,8 @@
   "license": "ISC",
   "author": "Francesco Trotta <ft@fasttime.org> (https://github.com/fasttime)",
   "files": [
-    "lib/*.js"
+    "lib",
+    "ts-parser.js"
   ],
   "main": "lib/index.js",
   "directories": {
@@ -27,12 +28,12 @@
     "build": "npm install && gulp"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "~1.13.0",
-    "eslint": "~6.1.0",
+    "@typescript-eslint/parser": "~2.19.2",
+    "eslint": "~6.8.0",
     "gulp": "~4.0.2",
-    "gulp-fasttime-lint": "~0.14.0",
-    "mocha": "~6.2.0",
-    "nyc": "~14.1.1"
+    "gulp-fasttime-lint": "~0.20.0",
+    "mocha": "~7.0.1",
+    "nyc": "~15.0.0"
   },
   "peerDependencies": {
     "eslint": ">=6.0.0"

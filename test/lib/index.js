@@ -12,26 +12,23 @@ describe
     'The main file',
     () =>
     {
-        const ruleDirPath = join(__dirname, '../../lib');
+        const ruleDirPath = join(__dirname, '../../lib/rules');
         const fileNames = readdirSync(ruleDirPath);
         fileNames.forEach
         (
             fileName =>
             {
-                if (fileName !== 'index.js')
-                {
-                    const ruleName = basename(fileName, '.js');
-                    it
-                    (
-                        `defines rule ${ruleName}`,
-                        () =>
-                        {
-                            const rulePath = join(ruleDirPath, fileName);
-                            const expectedRule = require(rulePath);
-                            assert.strictEqual(rules[ruleName], expectedRule);
-                        },
-                    );
-                }
+                const ruleName = basename(fileName, '.js');
+                it
+                (
+                    `defines rule ${ruleName}`,
+                    () =>
+                    {
+                        const rulePath = join(ruleDirPath, fileName);
+                        const expectedRule = require(rulePath);
+                        assert.strictEqual(rules[ruleName], expectedRule);
+                    },
+                );
             },
         );
     },

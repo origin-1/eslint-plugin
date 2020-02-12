@@ -1,14 +1,14 @@
-# `eslint-plugin-fasttime-rules` · [![npm version][npm badge]][npm url]
+# `@fasttime/eslint-plugin` · [![npm version][npm badge]][npm url]
 
 [ESLint](https://eslint.org/) plugin for [fasttime](https://github.com/fasttime?tab=repositories)
 rules.
 
 ## Installation
 
-Install ESLint and `eslint-plugin-fasttime-rules`:
+Install ESLint and `@fasttime/eslint-plugin`:
 
 ```console
-npm i --save-dev eslint eslint-plugin-fasttime-rules
+npm i --save-dev eslint @fasttime/eslint-plugin
 ```
 
 ### Note
@@ -16,24 +16,23 @@ npm i --save-dev eslint eslint-plugin-fasttime-rules
 If you installed ESLint globally (using the `-g` flag) then you must also install plugins globally:
 
 ```console
-npm i -g eslint-plugin-fasttime-rules
+npm i -g @fasttime/eslint-plugin
 ```
 
 ## Usage
 
-Add `"fasttime-rules"` to the plugins section of your `.eslintrc` configuration file.
-You can omit the `eslint-plugin-` prefix.
+Add `"@fasttime"` to the plugins section of your `.eslintrc` configuration file.
 Then configure the rules `nice-space-before-function-paren` and `no-spaces-in-call-expression` under
 the `"rules"` section.
 
 ```json
 {
     "plugins": [
-        "fasttime-rules"
+        "@fasttime"
     ],
     "rules": {
-        "fasttime-rules/nice-space-before-function-paren": "error",
-        "fasttime-rules/no-spaces-in-call-expression": "error"
+        "@fasttime/nice-space-before-function-paren": "error",
+        "@fasttime/no-spaces-in-call-expression": "error"
     }
 }
 ```
@@ -59,7 +58,7 @@ they are surrounded by regular whitespaces.
 Examples of **incorrect** code for this rule:
 
 ```js
-/* eslint fasttime-rules/nice-space-before-function-paren: "error" */
+/* eslint @fasttime/nice-space-before-function-paren: "error" */
 /* eslint-env es6 */
 
 function foo ()
@@ -95,7 +94,7 @@ var foo = async(a) => await a
 Examples of **correct** code for this rule:
 
 ```js
-/* eslint fasttime-rules/nice-space-before-function-paren: "error" */
+/* eslint @fasttime/nice-space-before-function-paren: "error" */
 /* eslint-env es6 */
 
 function foo(arg1, arg2)
@@ -165,15 +164,16 @@ the parentheses that invoke it, ESLint offers the rule
 Anyway, this setting also disallows line breaks and spaces around comments when they are found
 between a function name and the left parenthesis.
 
-`eslint-plugin-fasttime-rules` provides the rule `no-spaces-in-call-expression` to disallow spaces
+`@fasttime/eslint-plugin` provides the rule `no-spaces-in-call-expression` to disallow spaces
 in call or new expressions while still allowing line breaks and comments.
 This rule was designed as a replacement for the [JSCS](https://jscs-dev.github.io/) rule
-[`disallowSpacesInCallExpression`](https://jscs-dev.github.io/rule/disallowSpacesInCallExpression) which has a similar functionality.
+[`disallowSpacesInCallExpression`](https://jscs-dev.github.io/rule/disallowSpacesInCallExpression)
+which provides similar functionality.
 
 Examples of **incorrect** code for this rule:
 
 ```js
-/* eslint fasttime-rules/no-spaces-in-call-expression: "error" */
+/* eslint @fasttime/no-spaces-in-call-expression: "error" */
 
 fn ();
 ```
@@ -181,7 +181,7 @@ fn ();
 Examples of **correct** code for this rule:
 
 ```js
-/* eslint fasttime-rules/no-spaces-in-call-expression: "error" */
+/* eslint @fasttime/no-spaces-in-call-expression: "error" */
 
 fn();
 
@@ -202,5 +202,5 @@ fn // this is fine, too
 
 * [ESLint Issue #7587](https://github.com/eslint/eslint/issues/7587)
 
-[npm badge]: https://badge.fury.io/js/eslint-plugin-fasttime-rules.svg
-[npm url]: https://www.npmjs.com/package/eslint-plugin-fasttime-rules
+[npm badge]: https://badge.fury.io/js/@fasttime%2Feslint-plugin.svg
+[npm url]: https://www.npmjs.com/package/@fasttime/eslint-plugin
