@@ -1,6 +1,19 @@
 'use strict';
 
-const { series, task } = require('gulp');
+const { parallel, series, task } = require('gulp');
+
+task
+(
+    'clean',
+    async () =>
+    {
+        const { promises: { rmdir } } = require('fs');
+
+        const paths = ['.nyc_output', 'coverage'];
+        const options = { recursive: true };
+        await Promise.all(paths.map(path => rmdir(path, options)));
+    },
+);
 
 task
 (
@@ -13,7 +26,7 @@ task
         lint
         (
             {
-                src: ['**/*.js', '!coverage/**', '!node_modules/**'],
+                src: '{,{lib,test}/**/}*.js',
                 envs: 'node',
                 parserOptions: { ecmaVersion: 8 },
             },
@@ -46,4 +59,4 @@ task
     },
 );
 
-task('default', series('lint', 'test'));
+task('default', series(parallel('clean', 'lint'), 'test'));
