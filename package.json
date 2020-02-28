@@ -1,6 +1,6 @@
 {
   "name": "@fasttime/eslint-plugin",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "fasttime ESLint plugin",
   "keywords": [
     "eslint",
