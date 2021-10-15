@@ -7,29 +7,21 @@ task
     'clean',
     async () =>
     {
-        const { promises: { rmdir } } = require('fs');
+        const { rm } = require('fs/promises');
 
-        await rmdir('coverage', { recursive: true });
+        await rm('coverage', { force: true, recursive: true });
     },
 );
 
 task
 (
     'lint',
-    () =>
+    async () =>
     {
-        const lint = require('@fasttime/gulp-lint');
+        const { lint } = require('@fasttime/lint');
 
-        const stream =
-        lint
-        (
-            {
-                src: '{,{lib,test}/**/}*.js',
-                envs: 'node',
-                parserOptions: { ecmaVersion: 8 },
-            },
-        );
-        return stream;
+        await
+        lint({ src: '{,{lib,test}/**/}*.js', envs: ['node'], parserOptions: { ecmaVersion: 8 } });
     },
 );
 
