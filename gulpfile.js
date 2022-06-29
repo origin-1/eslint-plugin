@@ -21,30 +21,37 @@ task
         const { lint } = require('@fasttime/lint');
 
         await
-        lint({ src: '{,{lib,test}/**/}*.js', envs: ['node'], parserOptions: { ecmaVersion: 8 } });
+        lint
+        ({ src: '{,{lib,test}/**/}*.js', envs: ['node'], parserOptions: { ecmaVersion: 2020 } });
     },
 );
 
 task
 (
     'test',
-    callback =>
+    async () =>
     {
-        const { fork } = require('child_process');
+        const { default: c8js } = await import('c8js');
 
-        const { resolve } = require;
-        const c8Path = resolve('c8/bin/c8');
-        const mochaPath = resolve('mocha/bin/mocha');
-        const forkArgs =
-        [
-            '--reporter=html',
-            '--reporter=text-summary',
+        const mochaPath = require.resolve('mocha/bin/mocha');
+        await c8js
+        (
             mochaPath,
-            '--check-leaks',
-            'test/**/*.js',
-        ];
-        const childProcess = fork(c8Path, forkArgs);
-        childProcess.on('exit', code => callback(code && 'Test failed'));
+            ['--check-leaks', 'test/**/*.js'],
+            {
+                all: true,
+                reporter: ['html', 'text-summary'],
+                src: 'lib',
+                useC8Config: false,
+                watermarks:
+                {
+                    branches:   [90, 100],
+                    functions:  [90, 100],
+                    lines:      [90, 100],
+                    statements: [90, 100],
+                },
+            },
+        );
     },
 );
 

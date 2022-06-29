@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@fasttime/lint": "latest",
-    "c8": "latest",
+    "c8js": "latest",
     "eslint": "latest",
     "eslint-plugin": "latest",
     "gulp": "latest",
