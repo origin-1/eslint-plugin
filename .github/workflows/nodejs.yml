@@ -6,34 +6,26 @@ jobs:
 
   lint:
 
-    name: lint
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: 18 >=18.1
     - run: |
         npm install
         gulp lint
 
   test:
 
-    name: test (Node.js ${{ matrix.node-version }})
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: ['12', '14', '16', '18']
 
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 18 >=18.1
     - run: |
         npm install
         npm test

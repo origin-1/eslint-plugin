@@ -1,6 +1,6 @@
 'use strict';
 
-const { parallel, series, task } = require('gulp');
+const { parallel, series, src, task } = require('gulp');
 
 task
 (
@@ -16,13 +16,18 @@ task
 task
 (
     'lint',
-    async () =>
+    () =>
     {
-        const { lint } = require('@fasttime/lint');
+        const { createBaseConfig }  = require('@origin-1/eslint-config');
+        const gulpESLintNew         = require('gulp-eslint-new');
 
-        await
-        lint
-        ({ src: '{,{lib,test}/**/}*.js', envs: ['node'], parserOptions: { ecmaVersion: 2020 } });
+        const baseConfig = createBaseConfig({ jsVersion: 2020, env: { node: true } });
+        baseConfig.extends = 'plugin:eslint-plugin/all';
+        const stream =
+        src('{,{lib,test}/**/}*.js')
+        .pipe(gulpESLintNew({ baseConfig, useEslintrc: false }))
+        .pipe(gulpESLintNew.format());
+        return stream;
     },
 );
 

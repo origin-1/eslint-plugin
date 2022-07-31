@@ -12,8 +12,7 @@
   "license": "ISC",
   "author": "Francesco Trotta <ft@fasttime.org> (https://github.com/fasttime)",
   "files": [
-    "lib",
-    "ts-parser.js"
+    "lib"
   ],
   "main": "lib/index.js",
   "directories": {
@@ -33,19 +32,18 @@
     "eslint-utils": "3"
   },
   "devDependencies": {
-    "@fasttime/lint": "latest",
+    "@origin-1/eslint-config": "latest",
     "c8js": "latest",
-    "eslint": "latest",
-    "eslint-plugin": "latest",
+    "eslint-plugin-eslint-plugin": "latest",
     "gulp": "latest",
+    "gulp-eslint-new": "latest",
     "mocha": "latest"
   },
   "peerDependencies": {
     "@typescript-eslint/parser": ">=2.0.0",
-    "eslint": ">=8.0.0",
-    "tslib": ">=2.0.0"
+    "eslint": ">=8.0.0"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.1"
   }
 }

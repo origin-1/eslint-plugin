@@ -1,10 +1,12 @@
 'use strict';
 
-const rule              = require('../../../lib/rules/nice-space-before-function-paren');
-const { RuleTester }    = require('eslint');
+const rule                      = require('../../../lib/rules/nice-space-before-function-paren');
+const { default: patchTslib }   = require('@origin-1/eslint-config/patch-tslib');
+const { RuleTester }            = require('eslint');
 
 const ruleTester = new RuleTester();
-const tsParser = require.resolve('../../../ts-parser');
+patchTslib(require);
+const tsParser = require.resolve('@typescript-eslint/parser');
 const test =
 {
     valid:
