@@ -1,14 +1,13 @@
-# `@fasttime/eslint-plugin` · [![npm version][npm badge]][npm url]
+# `@origin-1/eslint-plugin` · [![npm version][npm badge]][npm url]
 
-[ESLint](https://eslint.org/) plugin for [fasttime](https://github.com/fasttime?tab=repositories)
-rules.
+[ESLint](https://eslint.org/) plugin for [Origin₁](https://github.com/origin-1) rules.
 
 ## Installation
 
-Install ESLint and `@fasttime/eslint-plugin`:
+Install ESLint and `@origin-1/eslint-plugin`:
 
 ```console
-npm i --save-dev eslint @fasttime/eslint-plugin
+npm i --save-dev eslint @origin-1/eslint-plugin
 ```
 
 ### Note
@@ -16,23 +15,23 @@ npm i --save-dev eslint @fasttime/eslint-plugin
 If you installed ESLint globally (using the `-g` flag) then you must also install plugins globally:
 
 ```console
-npm i -g @fasttime/eslint-plugin
+npm i -g @origin-1/eslint-plugin
 ```
 
 ## Usage
 
-Add `"@fasttime"` to the plugins section of your `.eslintrc` configuration file.
+Add `"@origin-1"` to the plugins section of your `.eslintrc` configuration file.
 Then configure the rules `nice-space-before-function-paren` and `no-spaces-in-call-expression` under
 the `"rules"` section.
 
 ```json
 {
     "plugins": [
-        "@fasttime"
+        "@origin-1"
     ],
     "rules": {
-        "@fasttime/nice-space-before-function-paren": "error",
-        "@fasttime/no-spaces-in-call-expression": "error"
+        "@origin-1/nice-space-before-function-paren": "error",
+        "@origin-1/no-spaces-in-call-expression": "error"
     }
 }
 ```
@@ -52,13 +51,13 @@ settings `["error", { anonymous: "always", named: "never", asyncArrow: "always" 
 The main difference lies in the way line breaks are treated.
 While the predefined rule `space-before-function-paren` considers line breaks as regular spacing
 characters, and disallows them before the opening parenthesis in a regular named function
-definition, the fasttime rule `nice-space-before-function-paren` always allows newlines, also when
+definition, the Origin₁ rule `nice-space-before-function-paren` always allows newlines, also when
 they are surrounded by regular whitespaces.
 
 Examples of **incorrect** code for this rule:
 
 ```js
-/* eslint @fasttime/nice-space-before-function-paren: "error" */
+/* eslint @origin-1/nice-space-before-function-paren: "error" */
 /* eslint-env es6 */
 
 function foo ()
@@ -94,7 +93,7 @@ var foo = async(a) => await a
 Examples of **correct** code for this rule:
 
 ```js
-/* eslint @fasttime/nice-space-before-function-paren: "error" */
+/* eslint @origin-1/nice-space-before-function-paren: "error" */
 /* eslint-env es6 */
 
 function foo(arg1, arg2)
@@ -164,7 +163,7 @@ the parentheses that invoke it, ESLint offers the rule
 Anyway, this setting also disallows line breaks and spaces around comments when they are found
 between a function name and the left parenthesis.
 
-`@fasttime/eslint-plugin` provides the rule `no-spaces-in-call-expression` to disallow spaces
+`@origin-1/eslint-plugin` provides the rule `no-spaces-in-call-expression` to disallow spaces
 in call or new expressions while still allowing line breaks and comments.
 This rule was designed as a replacement for the [JSCS](https://jscs-dev.github.io/) rule
 [`disallowSpacesInCallExpression`](https://jscs-dev.github.io/rule/disallowSpacesInCallExpression)
@@ -173,7 +172,7 @@ which provides similar functionality.
 Examples of **incorrect** code for this rule:
 
 ```js
-/* eslint @fasttime/no-spaces-in-call-expression: "error" */
+/* eslint @origin-1/no-spaces-in-call-expression: "error" */
 
 fn ();
 ```
@@ -181,7 +180,7 @@ fn ();
 Examples of **correct** code for this rule:
 
 ```js
-/* eslint @fasttime/no-spaces-in-call-expression: "error" */
+/* eslint @origin-1/no-spaces-in-call-expression: "error" */
 
 fn();
 
@@ -202,5 +201,5 @@ fn // this is fine, too
 
 * [ESLint Issue #7587](https://github.com/eslint/eslint/issues/7587)
 
-[npm badge]: https://badge.fury.io/js/@fasttime%2Feslint-plugin.svg
-[npm url]: https://www.npmjs.com/package/@fasttime/eslint-plugin
+[npm badge]: https://badge.fury.io/js/@origin-1%2Feslint-plugin.svg
+[npm url]: https://www.npmjs.com/package/@origin-1/eslint-plugin
