@@ -26,7 +26,8 @@ task
         const stream =
         src('{,{lib,test}/**/}*.js')
         .pipe(gulpESLintNew({ baseConfig, useEslintrc: false }))
-        .pipe(gulpESLintNew.format());
+        .pipe(gulpESLintNew.format())
+        .pipe(gulpESLintNew.failAfterError());
         return stream;
     },
 );
@@ -44,10 +45,10 @@ task
             mochaPath,
             ['--check-leaks', 'test/**/*.js'],
             {
-                all: true,
-                reporter: ['html', 'text-summary'],
-                src: 'lib',
-                useC8Config: false,
+                all:            true,
+                reporter:       ['html', 'text-summary'],
+                src:            'lib',
+                useC8Config:    false,
                 watermarks:
                 {
                     branches:   [90, 100],
