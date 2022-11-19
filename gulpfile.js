@@ -21,8 +21,9 @@ task
         const { createBaseConfig }  = require('@origin-1/eslint-config');
         const gulpESLintNew         = require('gulp-eslint-new');
 
-        const baseConfig = createBaseConfig({ jsVersion: 2020, env: { node: true } });
-        baseConfig.extends = 'plugin:eslint-plugin/all';
+        const baseConfig =
+        createBaseConfig
+        ({ jsVersion: 2020, env: { node: true }, extends: 'plugin:eslint-plugin/all' });
         const stream =
         src('{,{lib,test}/**/}*.js')
         .pipe(gulpESLintNew({ baseConfig, useEslintrc: false }))

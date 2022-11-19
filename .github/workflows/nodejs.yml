@@ -19,13 +19,19 @@ jobs:
 
   test:
 
+    name: test (Node.js ${{ matrix.node-version }})
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['^18.1', '19']
 
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version: ^18.1
+        node-version: ${{ matrix.node-version }}
     - run: |
         npm install
         npm test
