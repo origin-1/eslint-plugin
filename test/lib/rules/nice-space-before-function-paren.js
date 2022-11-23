@@ -7,7 +7,7 @@ const { RuleTester }            = require('eslint');
 const ruleTester = new RuleTester();
 patchTslib(require);
 const tsParser = require.resolve('@typescript-eslint/parser');
-const test =
+const tests =
 {
     valid:
     [
@@ -328,4 +328,4 @@ const test =
         },
     ],
 };
-ruleTester.run('nice-space-before-function-paren', rule, test);
+ruleTester.run('nice-space-before-function-paren', rule, tests);

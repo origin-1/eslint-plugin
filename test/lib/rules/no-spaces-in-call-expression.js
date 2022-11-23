@@ -26,7 +26,7 @@ const newExprError =
 );
 
 const ruleTester = new RuleTester();
-const test =
+const tests =
 {
     valid:
     [
@@ -155,4 +155,4 @@ const test =
         },
     ],
 };
-ruleTester.run('no-spaces-in-call-expression', rule, test);
+ruleTester.run('no-spaces-in-call-expression', rule, tests);

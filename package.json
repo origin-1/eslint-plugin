@@ -28,9 +28,6 @@
     "coverage": "c8 --reporter=html --reporter=text-summary npm test",
     "test": "mocha --check-leaks test/{**,*/*}/*.js"
   },
-  "dependencies": {
-    "eslint-utils": "3"
-  },
   "devDependencies": {
     "@origin-1/eslint-config": "latest",
     "c8js": "latest",

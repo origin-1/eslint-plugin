@@ -23,7 +23,15 @@ task
 
         const baseConfig =
         createBaseConfig
-        ({ jsVersion: 2020, env: { node: true }, extends: 'plugin:eslint-plugin/all' });
+        (
+            {
+                jsVersion:  2020,
+                env:        { node: true },
+                extends:    'plugin:eslint-plugin/all',
+                rules:
+                { 'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+' }] },
+            },
+        );
         const stream =
         src('{,{lib,test}/**/}*.js')
         .pipe(gulpESLintNew({ baseConfig, useEslintrc: false }))
