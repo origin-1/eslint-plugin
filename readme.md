@@ -39,6 +39,69 @@ the `"rules"` section.
 
 ## Rules
 
+### `bracket-layout`
+
+The rule `bracket-layout` enforces that a bracket whose counterpart appears on a different line is
+not flanked by any other tokens in the same line.
+
+More exactly, for any pair of brackets spanning multiple lines, this rule forbids any tokens
+following the opening bracket in the same line, and any tokens preceding the closing bracket in
+the same line.
+Tokens preceding the opening bracket are also forbidden, unless they are syntactically bound to
+their containing node in a location where line breaks are not permitted, for example after a
+`return` keyword.
+Similarly, tokens following the closing bracket are forbidden in a location where line breaks are
+permitted, but the rules have been relaxed to allow most punctuators (commas, semicolons, operators,
+etc.) to follow.
+
+This rule supersedes the predefined rules
+[array-bracket-newline](https://eslint.org/docs/latest/rules/array-bracket-newline) and
+[brace-style](https://eslint.org/docs/latest/rules/brace-style).
+
+Examples of **incorrect** code for this rule:
+
+```js
+/* eslint @origin-1/bracket-layout: "error" */
+/* eslint-env es6 */
+
+foo(bar,
+baz);
+
+const a = [
+];
+
+while (true) {
+    // ...
+}
+
+do
+{
+    ...
+} while (condition);
+```
+
+Examples of **correct** code for this rule:
+
+```js
+/* eslint @origin-1/bracket-layout: "error" */
+foo = [{ bar: (42 + baz) }];
+
+foo =
+[
+    {
+        bar:
+        (
+            42 +
+            baz
+        )
+    }
+];
+
+throw (
+    new Error
+);
+```
+
 ### `nice-space-before-function-paren`
 
 #### Rule Details
@@ -47,8 +110,8 @@ The rule `nice-space-before-function-paren` enforces consistent spacing before t
 parenthesis in a function definition.
 
 This is similar to using the predefined rule
-[`space-before-function-paren`](https://eslint.org/docs/rules/space-before-function-paren) with
-settings `["error", { anonymous: "always", named: "never", asyncArrow: "always" }]`.
+[`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren)
+with settings `["error", { anonymous: "always", named: "never", asyncArrow: "always" }]`.
 The main difference lies in the way line breaks are treated.
 While the predefined rule `space-before-function-paren` considers line breaks as regular spacing
 characters, and disallows them before the opening parenthesis in a regular named function
@@ -59,7 +122,7 @@ Examples of **incorrect** code for this rule:
 
 ```js
 /* eslint @origin-1/nice-space-before-function-paren: "error" */
-/* eslint-env es6 */
+/* eslint-env es2017 */
 
 function foo ()
 {
@@ -95,7 +158,7 @@ Examples of **correct** code for this rule:
 
 ```js
 /* eslint @origin-1/nice-space-before-function-paren: "error" */
-/* eslint-env es6 */
+/* eslint-env es2017 */
 
 function foo(arg1, arg2)
 {
@@ -160,7 +223,8 @@ allowing line breaks and comments.
 
 In order to disallow spaces between a function name (or an expression evaluating to a function) and
 the parentheses that invoke it, ESLint offers the rule
-[`func-call-spacing`](https://eslint.org/docs/rules/func-call-spacing) with the option `"never"`.
+[`func-call-spacing`](https://eslint.org/docs/latest/rules/func-call-spacing) with the option
+`"never"`.
 Anyway, this setting also disallows line breaks and spaces around comments when they are found
 between a function name and the left parenthesis.
 
@@ -233,7 +297,7 @@ Examples of **incorrect** code for this rule:
 
 ```js
 /* eslint @origin-1/property-colon-spacing: "error" */
-/* eslint-env es2018 */
+/* eslint-env es2017 */
 
 var obj1 = { foo : bar };
 
@@ -255,7 +319,7 @@ Examples of **correct** code for this rule:
 
 ```js
 /* eslint @origin-1/property-colon-spacing: "error" */
-/* eslint-env es2018 */
+/* eslint-env es2020 */
 
 var obj1 = { foo: 1, [bar]: 2, 'baz': 3 };
 
