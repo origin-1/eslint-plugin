@@ -136,6 +136,41 @@ const tests =
             `,
             parser: tsParser,
         },
+        '!(\nfoo\n)',
+        '++(\nfoo\n);',
+        {
+            code:
+            `
+            [
+                ...[
+                    foo
+                ]
+            ]
+            `,
+            parserOptions: { ecmaVersion: 2015 },
+        },
+        {
+            code:
+            `
+            let foo:
+            [
+                ...[
+                    bar
+                ]
+            ]
+            `,
+            parser: tsParser,
+        },
+        {
+            code:
+            `
+            foo
+            ?.[
+                bar
+            ]
+            `,
+            parserOptions: { ecmaVersion: 2020 },
+        },
     ],
     invalid:
     [
@@ -545,6 +580,17 @@ const tests =
             errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
         },
         {
+            code:   '(\nfoo\n).bar',
+            output: '(\nfoo\n)\n.bar',
+            errors: [{ messageId: 'sameLineAfterClose' }],
+        },
+        {
+            code:           '(\nfoo\n)?.bar',
+            output:         '(\nfoo\n)\n?.bar',
+            parserOptions:  { ecmaVersion: 2020 },
+            errors:         [{ messageId: 'sameLineAfterClose' }],
+        },
+        {
             code:   '{\n} as();',
             output: '{\n}\n as();',
             parser: tsParser,
@@ -555,6 +601,12 @@ const tests =
             output: '{\n}\n satisfies();',
             parser: tsParser,
             errors: [{ messageId: 'sameLineAfterClose', data: { bracket: '}' } }],
+        },
+        {
+            code:   'foo > (\nbar\n)',
+            output: 'foo > \n(\nbar\n)',
+            parser: tsParser,
+            errors: [{ messageId: 'sameLineBeforeOpen' }],
         },
     ],
 };

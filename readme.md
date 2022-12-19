@@ -47,12 +47,15 @@ not flanked by any other tokens in the same line.
 More exactly, for any pair of brackets spanning multiple lines, this rule forbids any tokens
 following the opening bracket in the same line, and any tokens preceding the closing bracket in
 the same line.
-Tokens preceding the opening bracket are also forbidden, unless they are syntactically bound to
-their containing node in a location where line breaks are not permitted, for example after a
-`return` keyword.
-Similarly, tokens following the closing bracket are forbidden in a location where line breaks are
-permitted, but the rules have been relaxed to allow most punctuators (commas, semicolons, operators,
-etc.) to follow.
+Tokens preceding the opening bracket and tokens following the closing bracket are also forbidden,
+unless they are syntactically bound to their containing node in a location where line breaks are not
+permitted, for example after a `return` keyword or before a postfix `++` operator.
+Some exceptions to this rule are granted to allow for the following constructs:
+* The unary operators `!`, `+`, `++`, `-`, `--`, `^` and `~` before opening brackets.
+* Rest/spread syntax `...` before opening brackets.
+* Optional chaining operators `?.` before opening brackets.
+* Almost all punctuators after closing brackets, with the exception of `.`, `?.` and brackets of any
+kind.
 
 This rule supersedes the predefined rules
 [array-bracket-newline](https://eslint.org/docs/latest/rules/array-bracket-newline) and
