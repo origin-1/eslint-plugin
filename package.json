@@ -12,7 +12,8 @@
   "license": "ISC",
   "author": "Francesco Trotta <ft@fasttime.org> (https://github.com/fasttime)",
   "files": [
-    "lib"
+    "lib",
+    "rule-docs"
   ],
   "main": "lib/index.js",
   "directories": {
