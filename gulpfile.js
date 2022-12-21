@@ -35,7 +35,7 @@ task
         const stream =
         src('{,{lib,test}/**/}*.js')
         .pipe(gulpESLintNew({ baseConfig, useEslintrc: false }))
-        .pipe(gulpESLintNew.format())
+        .pipe(gulpESLintNew.format('compact'))
         .pipe(gulpESLintNew.failAfterError());
         return stream;
     },
