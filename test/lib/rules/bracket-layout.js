@@ -171,6 +171,20 @@ const tests =
             `,
             parserOptions: { ecmaVersion: 2020 },
         },
+        {
+            code:
+            [
+                'type Foo',
+                '<',
+                '    T',
+                '> =',
+                'Bar<',
+                '    T',
+                '>;',
+            ]
+            .join('\n'),
+            parser: tsParser,
+        },
     ],
     invalid:
     [
