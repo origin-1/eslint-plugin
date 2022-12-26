@@ -185,6 +185,27 @@ const tests =
             .join('\n'),
             parser: tsParser,
         },
+        {
+            code:
+            [
+                'type Foo = Bar[',
+                '    0',
+                '];',
+            ]
+            .join('\n'),
+            parser: tsParser,
+        },
+        {
+            code:
+            [
+                'type Foo =',
+                '(',
+                '    Bar | Baz',
+                ')[];',
+            ]
+            .join('\n'),
+            parser: tsParser,
+        },
     ],
     invalid:
     [
