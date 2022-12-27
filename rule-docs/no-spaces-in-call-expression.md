@@ -11,13 +11,15 @@ the parentheses that invoke it, ESLint offers the rule
 Anyway, this setting also disallows line breaks and spaces around comments when they are found
 between a function name and the left parenthesis.
 
-`@origin-1/eslint-plugin` provides the rule `no-spaces-in-call-expression` to disallow spaces
-in call or new expressions while still allowing line breaks and comments.
+`@origin-1/eslint-plugin` provides the rule `no-spaces-in-call-expression` to disallow spaces in
+call or new expressions while still allowing line breaks and comments.
 This rule was designed as a replacement for the [JSCS](https://jscs-dev.github.io/) rule
 [`disallowSpacesInCallExpression`](https://jscs-dev.github.io/rule/disallowSpacesInCallExpression)
 which provides similar functionality.
 
-## Examples of **incorrect** code for this rule
+## Examples
+
+### Examples of **incorrect** code for this rule
 
 ```js
 /* eslint @origin-1/no-spaces-in-call-expression: "error" */
@@ -25,7 +27,7 @@ which provides similar functionality.
 fn ();
 ```
 
-## Examples of **correct** code for this rule
+### Examples of **correct** code for this rule
 
 ```js
 /* eslint @origin-1/no-spaces-in-call-expression: "error" */
@@ -44,6 +46,10 @@ fn /* spaces around comments are fine */ ();
 fn // this is fine, too
 ();
 ```
+
+## Superseded core ESLint rules
+
+* [`func-call-spacing`](https://eslint.org/docs/latest/rules/func-call-spacing)
 
 ## Further reading
 

@@ -15,8 +15,6 @@ string texts are ignored.
 * In a multiline comment, each line is indented or unindented the same number of spaces as the first
 line.
 
-This rule supersedes the predefined rule [`indent`](https://eslint.org/docs/latest/rules/indent).
-
 ## Options
 
 This rule accepts a single option: an integer value which defines the expected indentation of the
@@ -25,7 +23,9 @@ Negative values are allowed.
 When a line is assigned an indentation of 0 or less spaces, it is expected to have no leading
 spaces.
 
-## Examples of **incorrect** code for this rule with the default `0` option
+## Examples
+
+### Examples of **incorrect** code for this rule with the default `0` option
 
 ```js
 /* eslint @origin-1/indent: "error" */
@@ -55,7 +55,7 @@ const foobaz = `${
 }`;
 ```
 
-## Examples of **correct** code for this rule with the default `0` option
+### Examples of **correct** code for this rule with the default `0` option
 
 ```js
 /* eslint @origin-1/indent: "error" */
@@ -85,7 +85,7 @@ foo + baz
 }`;
 ```
 
-## Examples of **incorrect** code for this rule with the `2` option
+### Examples of **incorrect** code for this rule with the `2` option
 
 ```js
 /* eslint @origin-1/indent: ["error", 2] */
@@ -94,7 +94,7 @@ if (foo)
     bar();
 ```
 
-## Examples of **correct** code for this rule with the `2` option
+### Examples of **correct** code for this rule with the `2` option
 
 ```js
         /* eslint @origin-1/indent: ["error", 2] */
@@ -103,7 +103,7 @@ if (foo)
             bar();
 ```
 
-## Examples of **incorrect** code for this rule with the `-1` option
+### Examples of **incorrect** code for this rule with the `-1` option
 
 ```js
 /* eslint @origin-1/indent: ["error", -1] */
@@ -114,7 +114,7 @@ if (foo)
 })();
 ```
 
-## Examples of **correct** code for this rule with the `-1` option
+### Examples of **correct** code for this rule with the `-1` option
 
 ```js
 /* eslint @origin-1/indent: ["error", -1] */
@@ -126,3 +126,7 @@ if (foo)
 
 })();
 ```
+
+## Superseded core ESLint rules
+
+* [`indent`](https://eslint.org/docs/latest/rules/indent)

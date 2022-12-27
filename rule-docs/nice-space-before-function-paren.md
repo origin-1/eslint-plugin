@@ -12,7 +12,9 @@ characters, and disallows them before the opening parenthesis in a regular named
 definition, the Origin₁ rule `nice-space-before-function-paren` always allows newlines, also when
 they are surrounded by regular whitespaces.
 
-## Examples of **incorrect** code for this rule
+## Examples
+
+### Examples of **incorrect** code for this rule
 
 ```js
 /* eslint @origin-1/nice-space-before-function-paren: "error" */
@@ -48,7 +50,7 @@ var foo =
 var foo = async(a) => await a
 ```
 
-## Examples of **correct** code for this rule
+### Examples of **correct** code for this rule
 
 ```js
 /* eslint @origin-1/nice-space-before-function-paren: "error" */
@@ -107,3 +109,7 @@ var foo2 =
 
 var foo = async (a) => await a
 ```
+
+## Superseded core ESLint rules
+
+* [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren)

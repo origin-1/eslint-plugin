@@ -17,11 +17,9 @@ Some exceptions to this rule are granted to allow for the following constructs:
 kind.
 Special relaxations to the rules above exist to permit compact IIFE style.
 
-This rule supersedes the predefined rules
-[`array-bracket-newline`](https://eslint.org/docs/latest/rules/array-bracket-newline) and
-[`brace-style`](https://eslint.org/docs/latest/rules/brace-style).
+## Examples
 
-## Examples of **incorrect** code for this rule
+### Examples of **incorrect** code for this rule
 
 ```js
 /* eslint @origin-1/bracket-layout: "error" */
@@ -43,7 +41,7 @@ do
 } while (condition);
 ```
 
-## Examples of **correct** code for this rule
+### Examples of **correct** code for this rule
 
 ```js
 /* eslint @origin-1/bracket-layout: "error" */
@@ -76,3 +74,8 @@ throw (
     // Do another thing...
 }());
 ```
+
+## Superseded core ESLint rules
+
+* [`array-bracket-newline`](https://eslint.org/docs/latest/rules/array-bracket-newline)
+* [`brace-style`](https://eslint.org/docs/latest/rules/brace-style)

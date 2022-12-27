@@ -24,7 +24,9 @@ that the first tokens or comments after the colons start at the same column.
 Only key-value properties are validated.
 Shortcut properties, spread properties, accessor and method definitions are not validated.
 
-## Examples of **incorrect** code for this rule
+## Examples
+
+### Examples of **incorrect** code for this rule
 
 ```js
 /* eslint @origin-1/property-colon-spacing: "error" */
@@ -46,7 +48,7 @@ method
 
 ```
 
-## Examples of **correct** code for this rule
+### Examples of **correct** code for this rule
 
 ```js
 /* eslint @origin-1/property-colon-spacing: "error" */
@@ -80,3 +82,7 @@ var obj3 =
     ...spread,
 };
 ```
+
+## Superseded core ESLint rules
+
+* [`key-spacing`](https://eslint.org/docs/latest/rules/key-spacing)
