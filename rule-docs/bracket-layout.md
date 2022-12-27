@@ -15,6 +15,7 @@ Some exceptions to this rule are granted to allow for the following constructs:
 * Optional chaining operators `?.` before opening brackets.
 * Almost all punctuators after closing brackets, with the exception of `.`, `?.` and brackets of any
 kind.
+Special relaxations to the rules above exist to permit compact IIFE style.
 
 This rule supersedes the predefined rules
 [`array-bracket-newline`](https://eslint.org/docs/latest/rules/array-bracket-newline) and
@@ -62,4 +63,8 @@ foo =
 throw (
     new Error
 );
+
+(function () {
+    // Do something...
+})();
 ```

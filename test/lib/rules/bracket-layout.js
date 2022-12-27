@@ -206,6 +206,29 @@ const tests =
             .join('\n'),
             parser: tsParser,
         },
+        `
+        (function () {
+            foo;
+        })();
+        `,
+        {
+            code:           '(() => 42)();',
+            parserOptions:  { ecmaVersion: 2015 },
+        },
+        {
+            code:
+            `
+            ((
+                foo,
+                bar,
+            ) => baz)();
+            `,
+            parserOptions: { ecmaVersion: 2017 },
+        },
+        {
+            code:   '((foo: Foo): void => { })();',
+            parser: tsParser,
+        },
     ],
     invalid:
     [
@@ -719,6 +742,96 @@ const tests =
             output: 'foo > \n(\nbar\n)',
             parser: tsParser,
             errors: [{ messageId: 'sameLineBeforeOpen' }],
+        },
+        {
+            code:
+            `
+            (
+            function () {
+            })();
+            `,
+            output:
+            `
+            (
+            function () \n{
+            }\n)\n();
+            `,
+            errors: [{ }, { }, { }, { }],
+        },
+        {
+            code:
+            `
+            (function () {
+            }
+            )();
+            `,
+            output:
+            `
+            (function () \n{
+            }
+            )();
+            `,
+            errors: [{ }],
+        },
+        {
+            code:
+            `
+            ((function () {
+            }))();
+            `,
+            output:
+            `
+            (\n(\nfunction () \n{
+            }\n)\n)\n();
+            `,
+            errors: [{ }, { }, { }, { }, { }, { }, { }, { }, { }],
+        },
+        {
+            code:
+            `
+            (function () {
+            }) /* comment */ (
+            );
+            `,
+            output:
+            `
+            (function () {
+            })\n /* comment */ \n(
+            );
+            `,
+            errors: [{ }, { }],
+        },
+        {
+            code:
+            `
+            (() => [
+                42
+            ])();
+            `,
+            parserOptions:  { ecmaVersion: 2015 },
+            output:
+            `
+            (() => \n[
+                42
+            ])();
+            `,
+            errors:         [{ }],
+        },
+        {
+            code:
+            `
+            (() => [
+                42
+            ]\t)();
+            `,
+            parserOptions:  { ecmaVersion: 2015 },
+            output:
+            `
+            (() => \n[
+                42
+            ]\t)();
+            `,
+            errors:         [{ }],
         },
     ],
 };
