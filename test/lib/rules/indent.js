@@ -74,6 +74,21 @@ const tests =
             parser: tsParser,
         },
         '     ',
+        {
+            code:
+            [
+                '(function () {',
+                'for (;;) /*',
+                ' FOO */ /*',
+                ' BAR */',
+                '    /* BAZ */',
+                '    // FOOBAR',
+                '    bar();',
+                '}());',
+            ]
+            .join('\n'),
+            options: [-1],
+        },
     ],
     invalid:
     [
@@ -81,13 +96,25 @@ const tests =
             code:   ' "not ok"',
             output: '"not ok"',
             errors:
-            [{ message: 'Expected indentation of 0 characters but found 1.', line: 1, column: 1 }],
+            [
+                {
+                    message:    'Expected indentation of 0 character(s) but found 1.',
+                    line:       1,
+                    column:     1,
+                },
+            ],
         },
         {
             code:   '(\n  \u2000"not ok"\n)',
             output: '(\n    "not ok"\n)',
             errors:
-            [{ message: 'Expected indentation of 4 characters but found 3.', line: 2, column: 1 }],
+            [
+                {
+                    message:    'Expected indentation of 4 character(s) but found 3.',
+                    line:       2,
+                    column:     1,
+                },
+            ],
         },
         {
             code:
@@ -291,6 +318,76 @@ const tests =
             code:   'switch (foo) { case 1:\n  case 2: }',
             output: 'switch (foo) { case 1:\ncase 2: }',
             errors: [{ messageId: 'indent', data: { actual: 2, expected: 0 } }],
+        },
+        {
+            code:       '   foo();',
+            options:    [1],
+            output:     '    foo();',
+            errors:     [{ messageId: 'indent', data: { actual: 3, expected: 4 } }],
+        },
+        {
+            code:       '     foo();',
+            options:    [1],
+            output:     '    foo();',
+            errors:     [{ messageId: 'indent', data: { actual: 5, expected: 4 } }],
+        },
+        {
+            code:       ' if (foo)\n bar();',
+            options:    [-1],
+            output:     'if (foo)\nbar();',
+            errors:
+            [
+                { messageId: 'indent', data: { actual: 1, expected: 0 } },
+                { messageId: 'indent', data: { actual: 1, expected: 0 } },
+            ],
+        },
+        {
+            code:
+            [
+                '/* FOO',
+                '   BAR */',
+                '     baz(); /*',
+                '       FOO',
+                '   BAR */',
+            ]
+            .join('\n'),
+            options: [1],
+            output:
+            [
+                '    /* FOO',
+                '       BAR */',
+                '    baz(); /*',
+                '      FOO',
+                '  BAR */',
+            ]
+            .join('\n'),
+            errors:
+            [
+                {
+                    messageId:  'indentBlockComment',
+                    data:       { missing: 4 },
+                    line:       1,
+                    column:     1,
+                    endLine:    2,
+                    endColumn:  10,
+                },
+                {
+                    messageId:  'indent',
+                    data:       { actual: 5, expected: 4 },
+                    line:       3,
+                    column:     1,
+                    endLine:    3,
+                    endColumn:  6,
+                },
+                {
+                    messageId:  'unindentBlockComment',
+                    data:       { extra: 1 },
+                    line:       3,
+                    column:     13,
+                    endLine:    5,
+                    endColumn:  10,
+                },
+            ],
         },
     ],
 };

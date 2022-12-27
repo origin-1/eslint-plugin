@@ -17,7 +17,15 @@ line.
 
 This rule supersedes the predefined rule [`indent`](https://eslint.org/docs/latest/rules/indent).
 
-## Examples of **incorrect** code for this rule
+## Options
+
+This rule accepts a single option: an integer value which defines the expected indentation of the
+first line of code, in units of 4 spaces (default `0`).
+Negative values are allowed.
+When a line is assigned an indentation of 0 or less spaces, it is expected to have no leading
+spaces.
+
+## Examples of **incorrect** code for this rule with the default `0` option
 
 ```js
 /* eslint @origin-1/indent: "error" */
@@ -47,7 +55,7 @@ const foobaz = `${
 }`;
 ```
 
-## Examples of **correct** code for this rule
+## Examples of **correct** code for this rule with the default `0` option
 
 ```js
 /* eslint @origin-1/indent: "error" */
@@ -75,4 +83,46 @@ const foobaz = `${
 /* Your comment here. */
 foo + baz
 }`;
+```
+
+## Examples of **incorrect** code for this rule with the `2` option
+
+```js
+/* eslint @origin-1/indent: ["error", 2] */
+
+if (foo)
+    bar();
+```
+
+## Examples of **correct** code for this rule with the `2` option
+
+```js
+        /* eslint @origin-1/indent: ["error", 2] */
+
+        if (foo)
+            bar();
+```
+
+## Examples of **incorrect** code for this rule with the `-1` option
+
+```js
+/* eslint @origin-1/indent: ["error", -1] */
+
+(function () {
+    if (foo)
+        bar();
+})();
+```
+
+## Examples of **correct** code for this rule with the `-1` option
+
+```js
+/* eslint @origin-1/indent: ["error", -1] */
+
+(function () {
+
+if (foo)
+    bar();
+
+})();
 ```
