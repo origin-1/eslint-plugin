@@ -76,9 +76,9 @@ const tests =
         {
             code:
             '({ a() { }, get b() { }, set b(b) { }, ...c, foo : bar })',
+            parserOptions: { ecmaVersion: 2018 },
             output:
             '({ a() { }, get b() { }, set b(b) { }, ...c, foo: bar })',
-            parserOptions: { ecmaVersion: 2018 },
             errors:
             [
                 {
@@ -95,9 +95,9 @@ const tests =
         {
             code:
             '({ __proto__ : null, foo : bar, [bar] : foo, "baz" : baz, 1 : 42, [a+\nb] : c })',
+            parserOptions: { ecmaVersion: 2018 },
             output:
             '({ __proto__: null, foo: bar, [bar]: foo, "baz": baz, 1: 42, [a+\nb]: c })',
-            parserOptions: { ecmaVersion: 2018 },
             errors:
             [
                 { messageId: 'extraSpaceBeforeColon', data: { computed: '', key: '__proto__' } },
@@ -183,6 +183,7 @@ const tests =
                 5,
             })
             `,
+            parserOptions: { ecmaVersion: 2018 },
             output:
             `
             ({
@@ -195,7 +196,6 @@ const tests =
                 5,
             })
             `,
-            parserOptions: { ecmaVersion: 2018 },
             errors:
             [
                 {
@@ -250,9 +250,9 @@ const tests =
         {
             code:
             '({ __proto__:  null, foo:  bar, [bar]:  foo, "baz":  baz, 1:  42, [a+\nb]:  c })',
+            parserOptions: { ecmaVersion: 2015 },
             output:
             '({ __proto__: null, foo: bar, [bar]: foo, "baz": baz, 1: 42, [a+\nb]: c })',
-            parserOptions: { ecmaVersion: 2015 },
             errors:
             [
                 { messageId: 'extraSpaceAfterColon', data: { computed: '', key: '__proto__' } },

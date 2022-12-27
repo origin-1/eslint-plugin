@@ -86,8 +86,8 @@ const tests =
         },
         {
             code:           'function * foo () {}',
-            output:         'function * foo() {}',
             parserOptions:  { ecmaVersion: 6 },
+            output:         'function * foo() {}',
             errors:
             [
                 {
@@ -100,8 +100,8 @@ const tests =
         },
         {
             code:           'async function foo () {}',
-            output:         'async function foo() {}',
             parserOptions:  { ecmaVersion: 8 },
+            output:         'async function foo() {}',
             errors:
             [
                 {
@@ -127,8 +127,8 @@ const tests =
         },
         {
             code:           'var bar = function * foo () {};',
-            output:         'var bar = function * foo() {};',
             parserOptions:  { ecmaVersion: 6 },
+            output:         'var bar = function * foo() {};',
             errors:
             [
                 {
@@ -141,8 +141,8 @@ const tests =
         },
         {
             code:           'var bar = async function foo () {};',
-            output:         'var bar = async function foo() {};',
             parserOptions:  { ecmaVersion: 8 },
+            output:         'var bar = async function foo() {};',
             errors:
             [
                 {
@@ -174,8 +174,8 @@ const tests =
         },
         {
             code:           'var obj = { foo () {} };',
-            output:         'var obj = { foo() {} };',
             parserOptions:  { ecmaVersion: 6 },
+            output:         'var obj = { foo() {} };',
             errors:
             [
                 {
@@ -188,8 +188,8 @@ const tests =
         },
         {
             code:           'class Foo { constructor () {} * method () {} }',
-            output:         'class Foo { constructor() {} * method() {} }',
             parserOptions:  { ecmaVersion: 6 },
+            output:         'class Foo { constructor() {} * method() {} }',
             errors:
             [
                 {
@@ -236,8 +236,8 @@ const tests =
         },
         {
             code:           'var foo = function *() {};',
-            output:         'var foo = function * () {};',
             parserOptions:  { ecmaVersion: 6 },
+            output:         'var foo = function * () {};',
             errors:
             [
                 {
@@ -250,8 +250,8 @@ const tests =
         },
         {
             code:           'var foo = async function() {};',
-            output:         'var foo = async function () {};',
             parserOptions:  { ecmaVersion: 8 },
+            output:         'var foo = async function () {};',
             errors:
             [
                 {
@@ -265,8 +265,8 @@ const tests =
 
         {
             code:           'async() => 1',
-            output:         'async () => 1',
             parserOptions:  { ecmaVersion: 8 },
+            output:         'async () => 1',
             errors:
             [
                 {
@@ -284,6 +284,7 @@ const tests =
                 'var obj = { get foo () {}, set foo (val) {}, bar () {} };',
             ]
             .join('\n'),
+            parserOptions: { ecmaVersion: 6 },
             output:
             [
                 'function foo() {}',
@@ -291,7 +292,6 @@ const tests =
                 'var obj = { get foo() {}, set foo(val) {}, bar() {} };',
             ]
             .join('\n'),
-            parserOptions: { ecmaVersion: 6 },
             errors:
             [
                 {

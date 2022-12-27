@@ -67,4 +67,12 @@ throw (
 (function () {
     // Do something...
 })();
+
+!function () {
+    // Do something else...
+}();
+
+(function () {
+    // Do another thing...
+}());
 ```

@@ -211,6 +211,13 @@ const tests =
             foo;
         })();
         `,
+        `
+        (function ()
+        {
+            foo;
+        }
+        )();
+        `,
         {
             code:           '(() => 42)();',
             parserOptions:  { ecmaVersion: 2015 },
@@ -229,6 +236,14 @@ const tests =
             code:   '((foo: Foo): void => { })();',
             parser: tsParser,
         },
+        `
+        !function () {
+        }();
+        `,
+        `
+        (function () {
+        }());
+        `,
     ],
     invalid:
     [
@@ -402,8 +417,8 @@ const tests =
         },
         {
             code:           'void function * (bar,\nbaz) { }',
-            output:         'void function * \n(\nbar,\nbaz\n)\n { }',
             parserOptions:  { ecmaVersion: 2018 },
+            output:         'void function * \n(\nbar,\nbaz\n)\n { }',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -414,8 +429,8 @@ const tests =
         },
         {
             code:           'void async function * (bar,\nbaz) { }',
-            output:         'void async function * \n(\nbar,\nbaz\n)\n { }',
             parserOptions:  { ecmaVersion: 2018 },
+            output:         'void async function * \n(\nbar,\nbaz\n)\n { }',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -426,8 +441,8 @@ const tests =
         },
         {
             code:           '; async (bar,\nbaz) => { }',
-            output:         '; async (\nbar,\nbaz\n) => { }',
             parserOptions:  { ecmaVersion: 2018 },
+            output:         '; async (\nbar,\nbaz\n) => { }',
             errors:
             [
                 { messageId: 'sameLineAfterOpen' },
@@ -451,8 +466,8 @@ const tests =
         },
         {
             code:           '; (foo,\nbar) => baz',
-            output:         '; \n(\nfoo,\nbar\n) => baz',
             parserOptions:  { ecmaVersion: 2015 },
+            output:         '; \n(\nfoo,\nbar\n) => baz',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -470,6 +485,7 @@ const tests =
                 { }
             }
             `,
+            parserOptions: { ecmaVersion: 2018 },
             output:
             `
             void
@@ -479,7 +495,6 @@ const tests =
                 { }
             }
             `,
-            parserOptions: { ecmaVersion: 2018 },
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -497,6 +512,7 @@ const tests =
                 { }
             }
             `,
+            parserOptions: { ecmaVersion: 2015 },
             output:
             `
             void
@@ -506,7 +522,6 @@ const tests =
                 { }
             }
             `,
-            parserOptions: { ecmaVersion: 2015 },
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -580,8 +595,8 @@ const tests =
         },
         {
             code:           'for (foo of\nbar);',
-            output:         'for \n(\nfoo of\nbar\n);',
             parserOptions:  { ecmaVersion: 2015 },
+            output:         'for \n(\nfoo of\nbar\n);',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -621,8 +636,8 @@ const tests =
         },
         {
             code:   'try { } catch (foo:\nany) { }',
-            output: 'try { } catch \n(\nfoo:\nany\n)\n { }',
             parser: tsParser,
+            output: 'try { } catch \n(\nfoo:\nany\n)\n { }',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -653,6 +668,7 @@ const tests =
                 { }
             };
             `,
+            parserOptions:  { ecmaVersion: 2015 },
             output:
             `
             void
@@ -663,7 +679,6 @@ const tests =
                 { }
             };
             `,
-            parserOptions:  { ecmaVersion: 2015 },
             errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
         },
         {
@@ -677,6 +692,7 @@ const tests =
                 { }
             };
             `,
+            parserOptions:  { ecmaVersion: 2015 },
             output:
             `
             void
@@ -687,7 +703,6 @@ const tests =
                 { }
             };
             `,
-            parserOptions:  { ecmaVersion: 2015 },
             errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
         },
         {
@@ -701,6 +716,7 @@ const tests =
                 { }
             };
             `,
+            parserOptions:  { ecmaVersion: 2015 },
             output:
             `
             void
@@ -711,7 +727,6 @@ const tests =
                 { }
             };
             `,
-            parserOptions:  { ecmaVersion: 2015 },
             errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
         },
         {
@@ -721,26 +736,26 @@ const tests =
         },
         {
             code:           '(\nfoo\n)?.bar',
-            output:         '(\nfoo\n)\n?.bar',
             parserOptions:  { ecmaVersion: 2020 },
+            output:         '(\nfoo\n)\n?.bar',
             errors:         [{ messageId: 'sameLineAfterClose' }],
         },
         {
             code:   '{\n} as();',
-            output: '{\n}\n as();',
             parser: tsParser,
+            output: '{\n}\n as();',
             errors: [{ messageId: 'sameLineAfterClose', data: { bracket: '}' } }],
         },
         {
             code:   '{\n} satisfies();',
-            output: '{\n}\n satisfies();',
             parser: tsParser,
+            output: '{\n}\n satisfies();',
             errors: [{ messageId: 'sameLineAfterClose', data: { bracket: '}' } }],
         },
         {
             code:   'foo > (\nbar\n)',
-            output: 'foo > \n(\nbar\n)',
             parser: tsParser,
+            output: 'foo > \n(\nbar\n)',
             errors: [{ messageId: 'sameLineBeforeOpen' }],
         },
         {
@@ -756,7 +771,13 @@ const tests =
             function () \n{
             }\n)\n();
             `,
-            errors: [{ }, { }, { }, { }],
+            errors:
+            [
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '{' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: '}' } },
+                { messageId: 'sameLineBeforeClose', data: { bracket: ')' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: ')' } },
+            ],
         },
         {
             code:
@@ -771,7 +792,7 @@ const tests =
             }
             )();
             `,
-            errors: [{ }],
+            errors: [{ messageId: 'sameLineBeforeOpen', data: { bracket: '{' } }],
         },
         {
             code:
@@ -784,7 +805,18 @@ const tests =
             (\n(\nfunction () \n{
             }\n)\n)\n();
             `,
-            errors: [{ }, { }, { }, { }, { }, { }, { }, { }, { }],
+            errors:
+            [
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '(' } },
+                { messageId: 'sameLineAfterOpen', data: { bracket: '(' } },
+                { messageId: 'sameLineAfterOpen', data: { bracket: '(' } },
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '{' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: '}' } },
+                { messageId: 'sameLineBeforeClose', data: { bracket: ')' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: ')' } },
+                { messageId: 'sameLineBeforeClose', data: { bracket: ')' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: ')' } },
+            ],
         },
         {
             code:
@@ -799,23 +831,11 @@ const tests =
             })\n /* comment */ \n(
             );
             `,
-            errors: [{ }, { }],
-        },
-        {
-            code:
-            `
-            (() => [
-                42
-            ])();
-            `,
-            parserOptions:  { ecmaVersion: 2015 },
-            output:
-            `
-            (() => \n[
-                42
-            ])();
-            `,
-            errors:         [{ }],
+            errors:
+            [
+                { messageId: 'sameLineAfterClose', data: { bracket: ')' } },
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '(' } },
+            ],
         },
         {
             code:
@@ -831,8 +851,66 @@ const tests =
                 42
             ]\t)();
             `,
-            errors:         [{ }],
+            errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '[' } }],
         },
+        {
+            code:
+            `
+            (function () {
+            }) /* comment */ (
+            );
+            `,
+            output:
+            `
+            (function () {
+            })\n /* comment */ \n(
+            );
+            `,
+            errors:
+            [
+                { messageId: 'sameLineAfterClose', data: { bracket: ')' } },
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '(' } },
+            ],
+        },
+        {
+            code:
+            `
+            !function () {
+            } /* comment */ (
+            );
+            `,
+            output:
+            `
+            !function () {
+            }\n /* comment */ \n(
+            );
+            `,
+            errors:
+            [
+                { messageId: 'sameLineAfterClose', data: { bracket: '}' } },
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '(' } },
+            ],
+        },
+        {
+            code:
+            `
+            (function () {
+            } /* comment */ (
+            ));
+            `,
+            output:
+            `
+            (function () {
+            }\n /* comment */ \n(
+            ));
+            `,
+            errors:
+            [
+                { messageId: 'sameLineAfterClose', data: { bracket: '}' } },
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '(' } },
+            ],
+        },
+
     ],
 };
 
