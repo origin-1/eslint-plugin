@@ -1,6 +1,6 @@
 {
   "name": "@origin-1/eslint-plugin",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "description": "Origin₁ ESLint plugin",
   "keywords": [
     "eslint",
