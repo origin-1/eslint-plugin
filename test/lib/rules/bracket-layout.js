@@ -206,18 +206,6 @@ const tests =
             .join('\n'),
             parser: tsParser,
         },
-        `
-        (function () {
-            foo;
-        })();
-        `,
-        `
-        (function ()
-        {
-            foo;
-        }
-        )();
-        `,
         {
             code:           '(() => 42)();',
             parserOptions:  { ecmaVersion: 2015 },
@@ -236,6 +224,18 @@ const tests =
             code:   '((foo: Foo): void => { })();',
             parser: tsParser,
         },
+        `
+        (function () {
+            foo;
+        })();
+        `,
+        `
+        (function ()
+        {
+            foo;
+        }
+        )();
+        `,
         `
         !function () {
         }();
@@ -910,7 +910,65 @@ const tests =
                 { messageId: 'sameLineBeforeOpen', data: { bracket: '(' } },
             ],
         },
-
+        {
+            code:
+            `
+            (function () {
+            })?.();
+            `,
+            parserOptions: { ecmaVersion: 2020 },
+            output:
+            `
+            (\nfunction () \n{
+            }\n)\n?.();
+            `,
+            errors:
+            [
+                { messageId: 'sameLineAfterOpen', data: { bracket: '(' } },
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '{' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: '}' } },
+                { messageId: 'sameLineBeforeClose', data: { bracket: ')' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: ')' } },
+            ],
+        },
+        {
+            code:
+            `
+            !function () {
+            }?.();
+            `,
+            parserOptions: { ecmaVersion: 2020 },
+            output:
+            `
+            !function () \n{
+            }\n?.();
+            `,
+            errors:
+            [
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '{' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: '}' } },
+            ],
+        },
+        {
+            code:
+            `
+            (function () {
+            }?.());
+            `,
+            parserOptions: { ecmaVersion: 2020 },
+            output:
+            `
+            (\nfunction () \n{
+            }\n?.()\n);
+            `,
+            errors:
+            [
+                { messageId: 'sameLineAfterOpen', data: { bracket: '(' } },
+                { messageId: 'sameLineBeforeOpen', data: { bracket: '{' } },
+                { messageId: 'sameLineAfterClose', data: { bracket: '}' } },
+                { messageId: 'sameLineBeforeClose', data: { bracket: ')' } },
+            ],
+        },
     ],
 };
 
