@@ -291,6 +291,46 @@ const tests =
                 { messageId: 'missingSpaceAfterColon' },
             ],
         },
+        {
+            code:           'function _({ a :b, [(c, d)]:  e, f, ...g }) { }',
+            parserOptions:  { ecmaVersion: 2018 },
+            output:         'function _({ a: b, [(c, d)]: e, f, ...g }) { }',
+            errors:
+            [
+                { messageId: 'extraSpaceBeforeColon', data: { computed: '', key: 'a' } },
+                { messageId: 'missingSpaceAfterColon', data: { computed: '', key: 'a' } },
+                { messageId: 'extraSpaceAfterColon', data: { computed: 'computed ', key: 'c, d' } },
+            ],
+        },
+        {
+            code:
+            `
+            (
+                {
+                    foo:  bar,
+                    bar : foo = 42,
+                    [$]:   baz,
+                }
+            ) => _;
+            `,
+            parserOptions: { ecmaVersion: 2015 },
+            output:
+            `
+            (
+                {
+                    foo:  bar,
+                    bar:  foo = 42,
+                    [$]:  baz,
+                }
+            ) => _;
+            `,
+            errors:
+            [
+                { message: 'Extra space before colon of property \'bar\'.' },
+                { message: 'Missing space after colon of property \'bar\'.' },
+                { message: 'Extra space after colon of computed property \'$\'.' },
+            ],
+        },
     ],
 };
 

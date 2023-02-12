@@ -2,7 +2,7 @@
 # `property-colon-spacing`
 
 The rule `property-colon-spacing` enforces consistent spacing around the colon of key-value
-properties in object literals.
+properties in object literals and object patterns.
 
 The rule requires that a property has no spaces before the colon if it is pre-adjustable, and that
 is has a consistent, nonzero number of spaces after the colon if it is post-adjustable.
@@ -36,7 +36,7 @@ var obj1 = { foo : bar };
 
 var obj2 = { foo:bar };
 
-var obj3 = { foo:  bar };
+var { foo:  bar } = obj3;
 
 method
 (
@@ -45,7 +45,6 @@ method
         bar:  foo,
     },
 );
-
 ```
 
 ### Examples of **correct** code for this rule
@@ -81,6 +80,14 @@ var obj3 =
     { },
     ...spread,
 };
+
+(
+    {
+        foo:   bar,
+        baz,
+        [bar]: foo = 42,
+    }
+) => _;
 ```
 
 ## Superseded core ESLint rules
