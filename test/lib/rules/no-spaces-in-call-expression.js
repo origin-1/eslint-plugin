@@ -25,12 +25,13 @@ const newExprError =
     }
 );
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2020 } });
 const tests =
 {
     valid:
     [
         'f();',
+        'f?.();',
         'f(a, b);',
         'f.b();',
         'f.b().c();',
@@ -47,6 +48,7 @@ const tests =
         'describe/**/("foo", function () {});',
         'new (foo())',
         'f\n();',
+        'f?.\n();',
         'var f = new Foo\n();',
         'f// comment\n()',
         'f // comment\n ()',
@@ -55,9 +57,10 @@ const tests =
         'f\n(a, b)',
         'f.b\n();',
         'f\n()()',
-        '(f)(0)',
+        '(f)\n(0)',
         'f();\n t();',
         'f /**/()',
+        'f?./**/ ()',
         'f\u2028()',
         'f\u2029()',
     ],
@@ -67,6 +70,11 @@ const tests =
             code:   'f ();',
             errors: [callExprError(1, 2)],
             output: 'f();',
+        },
+        {
+            code:   'f?. ();',
+            errors: [callExprError(1, 4)],
+            output: 'f?.();',
         },
         {
             code:   'f (a, b);',
