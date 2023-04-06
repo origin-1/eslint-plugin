@@ -4,24 +4,28 @@ const rule              = require('../../../lib/rules/no-spaces-in-call-expressi
 const { RuleTester }    = require('eslint');
 
 const callExprError =
-(line, column) =>
+(line, column, endColumn) =>
 (
     {
         message:    'Unexpected space after left side of call expression.',
         type:       'CallExpression',
         line,
         column,
+        endLine:    line,
+        endColumn,
     }
 );
 
 const newExprError =
-(line, column) =>
+(line, column, endColumn) =>
 (
     {
         message:    'Unexpected space after left side of new expression.',
         type:       'NewExpression',
         line,
         column,
+        endLine:    line,
+        endColumn,
     }
 );
 
@@ -68,97 +72,97 @@ const tests =
     [
         {
             code:   'f ();',
-            errors: [callExprError(1, 2)],
+            errors: [callExprError(1, 2, 3)],
             output: 'f();',
         },
         {
             code:   'f?. ();',
-            errors: [callExprError(1, 4)],
+            errors: [callExprError(1, 4, 5)],
             output: 'f?.();',
         },
         {
             code:   'f (a, b);',
-            errors: [callExprError(1, 2)],
+            errors: [callExprError(1, 2, 3)],
             output: 'f(a, b);',
         },
         {
             code:   'f.b ();',
-            errors: [callExprError(1, 4)],
+            errors: [callExprError(1, 4, 5)],
             output: 'f.b();',
         },
         {
             code:   'f.b().c ();',
-            errors: [callExprError(1, 8)],
+            errors: [callExprError(1, 8, 9)],
             output: 'f.b().c();',
         },
         {
             code:   'f.b ().c ();',
-            errors: [callExprError(1, 4), callExprError(1, 9)],
+            errors: [callExprError(1, 4, 5), callExprError(1, 9, 10)],
             output: 'f.b().c();',
         },
         {
             code:   'f () ()',
-            errors: [callExprError(1, 2), callExprError(1, 5)],
+            errors: [callExprError(1, 2, 3), callExprError(1, 5, 6)],
             output: 'f()()',
         },
         {
             code:   '(function() {} ())',
-            errors: [callExprError(1, 15)],
+            errors: [callExprError(1, 15, 16)],
             output: '(function() {}())',
         },
         {
             code:   'var f = new Foo ()',
-            errors: [newExprError(1, 16)],
+            errors: [newExprError(1, 16, 17)],
             output: 'var f = new Foo()',
         },
         {
             code:   'f ( (0) )',
-            errors: [callExprError(1, 2)],
+            errors: [callExprError(1, 2, 3)],
             output: 'f( (0) )',
         },
         {
             code:   'f (0) (1)',
-            errors: [callExprError(1, 2), callExprError(1, 6)],
+            errors: [callExprError(1, 2, 3), callExprError(1, 6, 7)],
             output: 'f(0)(1)',
         },
         {
             code:   '(f) (0)',
-            errors: [callExprError(1, 4)],
+            errors: [callExprError(1, 4, 5)],
             output: '(f)(0)',
         },
         {
             code:   'f ();\n t   ();',
-            errors: [callExprError(1, 2), callExprError(2, 3)],
+            errors: [callExprError(1, 2, 3), callExprError(2, 3, 6)],
             output: 'f();\n t();',
         },
         {
             code:   'f.b \n ();',
-            errors: [callExprError(1, 4)],
+            errors: [callExprError(1, 4, 5)],
             output: 'f.b\n ();',
         },
         {
             code:   'f\n() ().b \n()\n ()',
-            errors: [callExprError(2, 3), callExprError(2, 8)],
+            errors: [callExprError(2, 3, 4), callExprError(2, 8, 9)],
             output: 'f\n()().b\n()\n ()',
         },
         {
             code:   'f.b\n().c ();',
-            errors: [callExprError(2, 5)],
+            errors: [callExprError(2, 5, 6)],
             output: 'f.b\n().c();',
         },
         {
             code:   'f() ()',
-            errors: [callExprError(1, 4)],
+            errors: [callExprError(1, 4, 5)],
             output: 'f()()',
         },
         {
             code:   'f\n() ()',
-            errors: [callExprError(2, 3)],
+            errors: [callExprError(2, 3, 4)],
             output: 'f\n()()',
         },
         {
             code:   'f(0) (1)',
-            errors: [callExprError(1, 5)],
+            errors: [callExprError(1, 5, 6)],
             output: 'f(0)(1)',
         },
     ],
