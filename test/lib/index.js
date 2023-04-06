@@ -2,10 +2,9 @@
 
 'use strict';
 
-const { rules }             = require('../..');
-const assert                = require('assert');
-const { readdirSync }       = require('fs');
-const { basename, join }    = require('path');
+const assert    = require('node:assert');
+const { join }  = require('node:path');
+const { rules } = require('../..');
 
 describe
 (
@@ -13,23 +12,18 @@ describe
     () =>
     {
         const ruleDirPath = join(__dirname, '../../lib/rules');
-        const fileNames = readdirSync(ruleDirPath);
-        fileNames.forEach
-        (
-            fileName =>
-            {
-                const ruleName = basename(fileName, '.js');
-                it
-                (
-                    `defines rule ${ruleName}`,
-                    () =>
-                    {
-                        const rulePath = join(ruleDirPath, fileName);
-                        const expectedRule = require(rulePath);
-                        assert.strictEqual(rules[ruleName], expectedRule);
-                    },
-                );
-            },
-        );
+        for (const [ruleName, actualRule] of Object.entries(rules))
+        {
+            it
+            (
+                `defines rule ${ruleName}`,
+                () =>
+                {
+                    const rulePath = join(ruleDirPath, `${ruleName}.js`);
+                    const expectedRule = require(rulePath);
+                    assert.strictEqual(actualRule, expectedRule);
+                },
+            );
+        }
     },
 );
