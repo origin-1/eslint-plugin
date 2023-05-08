@@ -29,9 +29,6 @@
     "release": "npm version -m 'Version %s'",
     "test": "mocha --check-leaks test/{**,*/*}/*.js"
   },
-  "dependencies": {
-    "grapheme-splitter": "^1.0.4"
-  },
   "devDependencies": {
     "@origin-1/eslint-config": "latest",
     "c8js": "latest",
