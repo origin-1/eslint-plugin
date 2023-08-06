@@ -32,6 +32,7 @@ Then configure the rules defined by this plugin under the `"rules"` section.
         "@origin-1/bracket-layout": "error",
         "@origin-1/indent": "error",
         "@origin-1/nice-space-before-function-paren": "error",
+        "@origin-1/no-extra-new": "error",
         "@origin-1/no-spaces-in-call-expression": "error",
         "@origin-1/no-spaces-in-tagged-template": "error",
         "@origin-1/property-colon-spacing": "error"
@@ -44,6 +45,7 @@ Then configure the rules defined by this plugin under the `"rules"` section.
 * [`bracket-layout`](rule-docs/bracket-layout.md)
 * [`indent`](rule-docs/indent.md)
 * [`nice-space-before-function-paren`](rule-docs/nice-space-before-function-paren.md)
+* [`no-extra-new`](rule-docs/no-extra-new.md)
 * [`no-spaces-in-call-expression`](rule-docs/no-spaces-in-call-expression.md)
 * [`no-spaces-in-tagged-template`](rule-docs/no-spaces-in-tagged-template.md)
 * [`property-colon-spacing`](rule-docs/property-colon-spacing.md)
