@@ -1,11 +1,9 @@
 'use strict';
 
-const rule                      = require('../../../lib/rules/indent');
-const { default: patchTslib }   = require('@origin-1/eslint-config/patch-tslib');
-const { RuleTester }            = require('eslint');
+const rule              = require('../../../lib/rules/indent');
+const { RuleTester }    = require('eslint');
 
 const ruleTester = new RuleTester();
-patchTslib(require);
 const tsParser = require.resolve('@typescript-eslint/parser');
 const tests =
 {
