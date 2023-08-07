@@ -26,7 +26,7 @@
   "scripts": {
     "build": "npm install && gulp",
     "coverage": "c8 --reporter=html --reporter=text-summary npm test",
-    "release": "npm version -m 'Version %s'",
+    "release": "npm version -m \"Version %s\"",
     "test": "mocha --check-leaks test/{**,*/*}/*.js"
   },
   "devDependencies": {
