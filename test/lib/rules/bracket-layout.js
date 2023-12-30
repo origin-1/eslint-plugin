@@ -1,10 +1,10 @@
 'use strict';
 
-const rule              = require('../../../lib/rules/bracket-layout');
-const { RuleTester }    = require('eslint');
+const rule                              = require('../../../lib/rules/bracket-layout');
+const tsParser                          = require('@typescript-eslint/parser');
+const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
 
 const ruleTester = new RuleTester();
-const tsParser = require.resolve('@typescript-eslint/parser');
 const tests =
 {
     valid:
@@ -27,30 +27,17 @@ const tests =
         'void function () { }',
         'void function(bar) { }',
         'void function foo(bar) { }',
+        'async => async',
+        '; () => foo',
+        'void { foo() { } }',
+        `
+        void
         {
-            code:           'async => async',
-            parserOptions:  { ecmaVersion: 2018 },
-        },
-        {
-            code:           '; () => foo',
-            parserOptions:  { ecmaVersion: 2015 },
-        },
-        {
-            code:           'void { foo() { } }',
-            parserOptions:  { ecmaVersion: 2015 },
-        },
-        {
-            code:
-            `
-            void
-            {
-                foo
-                (bar)
-                { }
-            }
-            `,
-            parserOptions: { ecmaVersion: 2015 },
-        },
+            foo
+            (bar)
+            { }
+        }
+        `,
         'if (foo);',
         'if\n(\nfoo\n);',
         'while (foo);',
@@ -59,22 +46,13 @@ const tests =
         'for\n(\n;;\n);',
         'for (foo in bar);',
         'for\n(\nfoo in bar\n);',
-        {
-            code:           'for (foo of bar);',
-            parserOptions:  { ecmaVersion: 2015 },
-        },
-        {
-            code:           'for\n(\nfoo of bar\n);',
-            parserOptions:  { ecmaVersion: 2015 },
-        },
+        'for (foo of bar);',
+        'for\n(\nfoo of bar\n);',
         'do; while (foo);',
         'do; while\n(\nfoo\n);',
-        'with (foo);',
-        'with\n(\nfoo\n);',
-        {
-            code:           'try { } catch { }',
-            parserOptions:  { ecmaVersion: 2019 },
-        },
+        { code: 'with (foo);', languageOptions: { sourceType: 'script' } },
+        { code: 'with\n(\nfoo\n);', languageOptions: { sourceType: 'script' } },
+        'try { } catch { }',
         'try { } catch (foo) { }',
         `
         try { } catch
@@ -104,18 +82,14 @@ const tests =
             foo: bar,
         };
         `,
+        `
+        function * foo()
         {
-            code:
-            `
-            function * foo()
-            {
-                yield [
-                    bar
-                ];
-            }
-            `,
-            parserOptions: { ecmaVersion: 2015 },
-        },
+            yield [
+                bar
+            ];
+        }
+        `,
         {
             code:
             `
@@ -123,7 +97,7 @@ const tests =
                 foo
             ] as const
             `,
-            parser: tsParser,
+            languageOptions: { parser: tsParser },
         },
         {
             code:
@@ -132,21 +106,17 @@ const tests =
                 foo
             ] satisfies Bar
             `,
-            parser: tsParser,
+            languageOptions: { parser: tsParser },
         },
         '!(\nfoo\n)',
         '++(\nfoo\n);',
-        {
-            code:
-            `
-            [
-                ...[
-                    foo
-                ]
+        `
+        [
+            ...[
+                foo
             ]
-            `,
-            parserOptions: { ecmaVersion: 2015 },
-        },
+        ]
+        `,
         {
             code:
             `
@@ -157,18 +127,14 @@ const tests =
                 ]
             ]
             `,
-            parser: tsParser,
+            languageOptions: { parser: tsParser },
         },
-        {
-            code:
-            `
-            foo
-            ?.[
-                bar
-            ]
-            `,
-            parserOptions: { ecmaVersion: 2020 },
-        },
+        `
+        foo
+        ?.[
+            bar
+        ]
+        `,
         {
             code:
             [
@@ -181,7 +147,7 @@ const tests =
                 '>;',
             ]
             .join('\n'),
-            parser: tsParser,
+            languageOptions: { parser: tsParser },
         },
         {
             code:
@@ -191,7 +157,7 @@ const tests =
                 '];',
             ]
             .join('\n'),
-            parser: tsParser,
+            languageOptions: { parser: tsParser },
         },
         {
             code:
@@ -202,26 +168,16 @@ const tests =
                 ')[];',
             ]
             .join('\n'),
-            parser: tsParser,
+            languageOptions: { parser: tsParser },
         },
-        {
-            code:           '(() => 42)();',
-            parserOptions:  { ecmaVersion: 2015 },
-        },
-        {
-            code:
-            `
-            ((
-                foo,
-                bar,
-            ) => baz)();
-            `,
-            parserOptions: { ecmaVersion: 2017 },
-        },
-        {
-            code:   '((foo: Foo): void => { })();',
-            parser: tsParser,
-        },
+        '(() => 42)();',
+        `
+        ((
+            foo,
+            bar,
+        ) => baz)();
+        `,
+        { code: '((foo: Foo): void => { })();', languageOptions: { parser: tsParser } },
         `
         (function () {
             foo;
@@ -414,9 +370,8 @@ const tests =
             ],
         },
         {
-            code:           'void function * (bar,\nbaz) { }',
-            parserOptions:  { ecmaVersion: 2018 },
-            output:         'void function * \n(\nbar,\nbaz\n)\n { }',
+            code:   'void function * (bar,\nbaz) { }',
+            output: 'void function * \n(\nbar,\nbaz\n)\n { }',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -426,9 +381,8 @@ const tests =
             ],
         },
         {
-            code:           'void async function * (bar,\nbaz) { }',
-            parserOptions:  { ecmaVersion: 2018 },
-            output:         'void async function * \n(\nbar,\nbaz\n)\n { }',
+            code:   'void async function * (bar,\nbaz) { }',
+            output: 'void async function * \n(\nbar,\nbaz\n)\n { }',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -438,9 +392,8 @@ const tests =
             ],
         },
         {
-            code:           '; async (bar,\nbaz) => { }',
-            parserOptions:  { ecmaVersion: 2018 },
-            output:         '; async (\nbar,\nbaz\n) => { }',
+            code:   '; async (bar,\nbaz) => { }',
+            output: '; async (\nbar,\nbaz\n) => { }',
             errors:
             [
                 { messageId: 'sameLineAfterOpen' },
@@ -463,9 +416,8 @@ const tests =
             errors: [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
         },
         {
-            code:           '; (foo,\nbar) => baz',
-            parserOptions:  { ecmaVersion: 2015 },
-            output:         '; \n(\nfoo,\nbar\n) => baz',
+            code:   '; (foo,\nbar) => baz',
+            output: '; \n(\nfoo,\nbar\n) => baz',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -483,7 +435,6 @@ const tests =
                 { }
             }
             `,
-            parserOptions: { ecmaVersion: 2018 },
             output:
             `
             void
@@ -510,7 +461,6 @@ const tests =
                 { }
             }
             `,
-            parserOptions: { ecmaVersion: 2015 },
             output:
             `
             void
@@ -592,9 +542,8 @@ const tests =
             ],
         },
         {
-            code:           'for (foo of\nbar);',
-            parserOptions:  { ecmaVersion: 2015 },
-            output:         'for \n(\nfoo of\nbar\n);',
+            code:   'for (foo of\nbar);',
+            output: 'for \n(\nfoo of\nbar\n);',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -623,8 +572,9 @@ const tests =
             ],
         },
         {
-            code:   'with (foo +\nbar);',
-            output: 'with \n(\nfoo +\nbar\n);',
+            code:               'with (foo +\nbar);',
+            languageOptions:    { sourceType: 'script' },
+            output:             'with \n(\nfoo +\nbar\n);',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -633,9 +583,9 @@ const tests =
             ],
         },
         {
-            code:   'try { } catch (foo:\nany) { }',
-            parser: tsParser,
-            output: 'try { } catch \n(\nfoo:\nany\n)\n { }',
+            code:               'try { } catch (foo:\nany) { }',
+            languageOptions:    { parser: tsParser },
+            output:             'try { } catch \n(\nfoo:\nany\n)\n { }',
             errors:
             [
                 { messageId: 'sameLineBeforeOpen' },
@@ -666,7 +616,6 @@ const tests =
                 { }
             };
             `,
-            parserOptions:  { ecmaVersion: 2015 },
             output:
             `
             void
@@ -677,7 +626,7 @@ const tests =
                 { }
             };
             `,
-            errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
+            errors: [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
         },
         {
             code:
@@ -690,7 +639,6 @@ const tests =
                 { }
             };
             `,
-            parserOptions:  { ecmaVersion: 2015 },
             output:
             `
             void
@@ -701,7 +649,7 @@ const tests =
                 { }
             };
             `,
-            errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
+            errors: [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
         },
         {
             code:
@@ -714,7 +662,6 @@ const tests =
                 { }
             };
             `,
-            parserOptions:  { ecmaVersion: 2015 },
             output:
             `
             void
@@ -725,7 +672,7 @@ const tests =
                 { }
             };
             `,
-            errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
+            errors: [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
         },
         {
             code:   '(\nfoo\n).bar',
@@ -733,28 +680,27 @@ const tests =
             errors: [{ messageId: 'sameLineAfterClose' }],
         },
         {
-            code:           '(\nfoo\n)?.bar',
-            parserOptions:  { ecmaVersion: 2020 },
-            output:         '(\nfoo\n)\n?.bar',
-            errors:         [{ messageId: 'sameLineAfterClose' }],
+            code:   '(\nfoo\n)?.bar',
+            output: '(\nfoo\n)\n?.bar',
+            errors: [{ messageId: 'sameLineAfterClose' }],
         },
         {
-            code:   '{\n} as();',
-            parser: tsParser,
-            output: '{\n}\n as();',
-            errors: [{ messageId: 'sameLineAfterClose', data: { bracket: '}' } }],
+            code:               '{\n} as();',
+            languageOptions:    { parser: tsParser },
+            output:             '{\n}\n as();',
+            errors:             [{ messageId: 'sameLineAfterClose', data: { bracket: '}' } }],
         },
         {
-            code:   '{\n} satisfies();',
-            parser: tsParser,
-            output: '{\n}\n satisfies();',
-            errors: [{ messageId: 'sameLineAfterClose', data: { bracket: '}' } }],
+            code:               '{\n} satisfies();',
+            languageOptions:    { parser: tsParser },
+            output:             '{\n}\n satisfies();',
+            errors:             [{ messageId: 'sameLineAfterClose', data: { bracket: '}' } }],
         },
         {
-            code:   'foo > (\nbar\n)',
-            parser: tsParser,
-            output: 'foo > \n(\nbar\n)',
-            errors: [{ messageId: 'sameLineBeforeOpen' }],
+            code:               'foo > (\nbar\n)',
+            languageOptions:    { parser: tsParser },
+            output:             'foo > \n(\nbar\n)',
+            errors:             [{ messageId: 'sameLineBeforeOpen' }],
         },
         {
             code:
@@ -842,14 +788,13 @@ const tests =
                 42
             ]\t)();
             `,
-            parserOptions:  { ecmaVersion: 2015 },
             output:
             `
             (() => \n[
                 42
             ]\t)();
             `,
-            errors:         [{ messageId: 'sameLineBeforeOpen', data: { bracket: '[' } }],
+            errors: [{ messageId: 'sameLineBeforeOpen', data: { bracket: '[' } }],
         },
         {
             code:
@@ -914,7 +859,6 @@ const tests =
             (function () {
             })?.();
             `,
-            parserOptions: { ecmaVersion: 2020 },
             output:
             `
             (\nfunction () \n{
@@ -935,7 +879,6 @@ const tests =
             !function () {
             }?.();
             `,
-            parserOptions: { ecmaVersion: 2020 },
             output:
             `
             !function () \n{
@@ -953,7 +896,6 @@ const tests =
             (function () {
             }?.());
             `,
-            parserOptions: { ecmaVersion: 2020 },
             output:
             `
             (\nfunction () \n{

@@ -1,7 +1,7 @@
 'use strict';
 
-const rule             = require('../../../lib/rules/no-extra-new');
-const { RuleTester }   = require('eslint');
+const rule                              = require('../../../lib/rules/no-extra-new');
+const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
 
 const ruleTester = new RuleTester();
 const tests =
@@ -18,25 +18,17 @@ const tests =
         `
         var x = something ? MyClass : Object;
         var y = new x();`,
+        `
+        class Object
         {
-            code:
-            `
-            class Object
-            {
-                constructor() { }
-            }
-            new Object();
-            `,
-            parserOptions: { ecmaVersion: 6 },
-        },
-        {
-            code:
-            `
-            import { Object } from './';
-            new Object();
-            `,
-            parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-        },
+            constructor() { }
+        }
+        new Object();
+        `,
+        `
+        import { Object } from './';
+        new Object();
+        `,
         `
         var Error = CustomError;
         function foo()
@@ -44,24 +36,20 @@ const tests =
             throw new Error();
         }
         `,
+        `
+        function foo()
         {
-            code:
-            `
-            function foo()
-            {
-                throw new Error();
-            }
-            const Error = CustomError;
-            `,
-            parserOptions: { ecmaVersion: 6 },
+            throw new Error();
+        }
+        const Error = CustomError;
+        `,
+        {
+            code:               'throw new AggregateError(errors);',
+            languageOptions:    { globals: { AggregateError: 'off' } },
         },
         {
-            code:   'throw new AggregateError(errors);',
-            env:    { es2020: true },
-        },
-        {
-            code:       '(new Function(foo))();',
-            globals:    { Function: 'off' },
+            code:               '(new Function(foo))();',
+            languageOptions:    { globals: { Function: 'off' } },
         },
         `
         /* global RegExp:off */
@@ -79,9 +67,8 @@ const tests =
             errors: [{ messageId: 'unexpected', type: 'NewExpression' }],
         },
         {
-            code:           'const a = new Object();',
-            parserOptions:  { ecmaVersion: 6 },
-            errors:         [{ messageId: 'unexpected', type: 'NewExpression' }],
+            code:   'const a = new Object();',
+            errors: [{ messageId: 'unexpected', type: 'NewExpression' }],
         },
         {
             code:
@@ -102,7 +89,6 @@ const tests =
         },
         {
             code:   'throw new AggregateError(errors);',
-            env:    { es2021: true },
             errors: [{ messageId: 'unexpected', type: 'NewExpression' }],
         },
         {

@@ -1,7 +1,9 @@
 'use strict';
 
-const rule              = require('../../../lib/rules/no-spaces-in-call-expression');
-const { RuleTester }    = require('eslint');
+const rule =
+require('../../../lib/rules/no-spaces-in-call-expression');
+
+const { FlatRuleTester: RuleTester } = require('eslint/use-at-your-own-risk');
 
 const callExprError =
 (line, column, endColumn) =>
@@ -29,7 +31,7 @@ const newExprError =
     }
 );
 
-const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2020 } });
+const ruleTester = new RuleTester();
 const tests =
 {
     valid:

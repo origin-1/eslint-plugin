@@ -1,84 +1,62 @@
 'use strict';
 
-const rule             = require('../../../lib/rules/property-colon-spacing');
-const { RuleTester }   = require('eslint');
+const rule                              = require('../../../lib/rules/property-colon-spacing');
+const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
 
 const ruleTester = new RuleTester();
 const tests =
 {
     valid:
     [
+        '({ foo: bar, [bar]: foo, 1: 1, baz, a() { }, get b() { }, set b(b) { }, ...c })',
+        `
+        ({ a
+             :
+               b })
+        `,
+        '({ a /* - */: b })',
+        `
+        ({
+            a:      'A',
+            bb:     'B',
+            ccc:    'C',
+        })
+        `,
+        `
+        foo = {
+            "🌷": "bar", // 2 code points
+            "🎁": "baz", // 2 code points
+            "🇮🇳": "qux", // 4 code points
+            "🏳️‍🌈": "xyz", // 6 code points
+        };
+        `,
+        `
+        const obj =
         {
-            code:
-            '({ foo: bar, [bar]: foo, 1: 1, baz, a() { }, get b() { }, set b(b) { }, ...c })',
-            parserOptions: { ecmaVersion: 2018 },
-        },
-        {
-            code:
-            `
-            ({ a
-                 :
-                   b })
-            `,
-        },
-        {
-            code: '({ a /* - */: b })',
-        },
-        {
-            code:
-            `
-            ({
-                a:      'A',
-                bb:     'B',
-                ccc:    'C',
-            })
-            `,
-        },
-        {
-            code:
-            `
-            foo = {
-                "🌷": "bar", // 2 code points
-                "🎁": "baz", // 2 code points
-                "🇮🇳": "qux", // 4 code points
-                "🏳️‍🌈": "xyz", // 6 code points
-            };
-            `,
-        },
-        {
-            code:
-            `
-            const obj =
-            {
-                foo:     1,
-                 [bar]:  2,
-                'baz':   3,
-                [
-                    'multiline key'
-                ]: 4,
-                'value on next line':
-                    5,
-                shortcut,
-                get accessor()
-                { },
-                set accessor(value)
-                { },
-                method()
-                { },
-                ...spread,
-            };
-            `,
-            parserOptions: { ecmaVersion: 2018 },
-        },
+            foo:     1,
+             [bar]:  2,
+            'baz':   3,
+            [
+                'multiline key'
+            ]: 4,
+            'value on next line':
+                5,
+            shortcut,
+            get accessor()
+            { },
+            set accessor(value)
+            { },
+            method()
+            { },
+            ...spread,
+        };
+        `,
     ],
     invalid:
     [
         {
-            code:
-            '({ a() { }, get b() { }, set b(b) { }, ...c, foo : bar })',
-            parserOptions: { ecmaVersion: 2018 },
-            output:
-            '({ a() { }, get b() { }, set b(b) { }, ...c, foo: bar })',
+            code:   '({ a() { }, get b() { }, set b(b) { }, ...c, foo : bar })',
+            output: '({ a() { }, get b() { }, set b(b) { }, ...c, foo: bar })',
             errors:
             [
                 {
@@ -95,9 +73,7 @@ const tests =
         {
             code:
             '({ __proto__ : null, foo : bar, [bar] : foo, "baz" : baz, 1 : 42, [a+\nb] : c })',
-            parserOptions: { ecmaVersion: 2018 },
-            output:
-            '({ __proto__: null, foo: bar, [bar]: foo, "baz": baz, 1: 42, [a+\nb]: c })',
+            output: '({ __proto__: null, foo: bar, [bar]: foo, "baz": baz, 1: 42, [a+\nb]: c })',
             errors:
             [
                 { messageId: 'extraSpaceBeforeColon', data: { computed: '', key: '__proto__' } },
@@ -183,7 +159,6 @@ const tests =
                 5,
             })
             `,
-            parserOptions: { ecmaVersion: 2018 },
             output:
             `
             ({
@@ -250,9 +225,7 @@ const tests =
         {
             code:
             '({ __proto__:  null, foo:  bar, [bar]:  foo, "baz":  baz, 1:  42, [a+\nb]:  c })',
-            parserOptions: { ecmaVersion: 2015 },
-            output:
-            '({ __proto__: null, foo: bar, [bar]: foo, "baz": baz, 1: 42, [a+\nb]: c })',
+            output: '({ __proto__: null, foo: bar, [bar]: foo, "baz": baz, 1: 42, [a+\nb]: c })',
             errors:
             [
                 { messageId: 'extraSpaceAfterColon', data: { computed: '', key: '__proto__' } },
@@ -292,9 +265,8 @@ const tests =
             ],
         },
         {
-            code:           'function _({ a :b, [(c, d)]:  e, f, ...g }) { }',
-            parserOptions:  { ecmaVersion: 2018 },
-            output:         'function _({ a: b, [(c, d)]: e, f, ...g }) { }',
+            code:   'function _({ a :b, [(c, d)]:  e, f, ...g }) { }',
+            output: 'function _({ a: b, [(c, d)]: e, f, ...g }) { }',
             errors:
             [
                 { messageId: 'extraSpaceBeforeColon', data: { computed: '', key: 'a' } },
@@ -313,7 +285,6 @@ const tests =
                 }
             ) => _;
             `,
-            parserOptions: { ecmaVersion: 2015 },
             output:
             `
             (

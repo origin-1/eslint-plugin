@@ -18,7 +18,6 @@ they are surrounded by regular whitespaces.
 
 ```js
 /* eslint @origin-1/nice-space-before-function-paren: "error" */
-/* eslint-env es2017 */
 
 function foo ()
 {
@@ -54,7 +53,6 @@ var foo = async(a) => await a
 
 ```js
 /* eslint @origin-1/nice-space-before-function-paren: "error" */
-/* eslint-env es2017 */
 
 function foo(arg1, arg2)
 {

@@ -30,7 +30,6 @@ Shortcut properties, spread properties, accessor and method definitions are not 
 
 ```js
 /* eslint @origin-1/property-colon-spacing: "error" */
-/* eslint-env es2017 */
 
 var obj1 = { foo : bar };
 
@@ -51,7 +50,6 @@ method
 
 ```js
 /* eslint @origin-1/property-colon-spacing: "error" */
-/* eslint-env es2020 */
 
 var obj1 = { foo: 1, [bar]: 2, 'baz': 3 };
 

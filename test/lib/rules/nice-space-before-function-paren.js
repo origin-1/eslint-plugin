@@ -1,56 +1,54 @@
 'use strict';
 
-const rule              = require('../../../lib/rules/nice-space-before-function-paren');
-const { RuleTester }    = require('eslint');
+const rule =
+require('../../../lib/rules/nice-space-before-function-paren');
+
+const tsParser                          = require('@typescript-eslint/parser');
+const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
 
 const ruleTester = new RuleTester();
-const tsParser = require.resolve('@typescript-eslint/parser');
 const tests =
 {
     valid:
     [
         'function foo() {}',
         'function foo\n() {}',
-        { code: 'function foo<T>() {}', parser: tsParser },
-        { code: 'function foo<T>\n() {}', parser: tsParser },
-        { code: 'function * foo() {}', parserOptions: { ecmaVersion: 6 } },
-        { code: 'function * foo\n() {}', parserOptions: { ecmaVersion: 6 } },
-        { code: 'async function foo() {}', parserOptions: { ecmaVersion: 8 } },
-        { code: 'async function foo\n() {}', parserOptions: { ecmaVersion: 8 } },
+        { code: 'function foo<T>() {}', languageOptions: { parser: tsParser } },
+        { code: 'function foo<T>\n() {}', languageOptions: { parser: tsParser } },
+        'function * foo() {}',
+        'function * foo\n() {}',
+        'async function foo() {}',
+        'async function foo\n() {}',
         'var bar = function foo() {};',
         'var bar = function foo\n() {};',
-        { code: 'var bar = function * foo() {};', parserOptions: { ecmaVersion: 6 } },
-        { code: 'var bar = function * foo\n() {}', parserOptions: { ecmaVersion: 6 } },
-        { code: 'var bar = async function foo() {};', parserOptions: { ecmaVersion: 8 } },
-        { code: 'var bar = async function foo\n() {}', parserOptions: { ecmaVersion: 8 } },
+        'var bar = function * foo() {};',
+        'var bar = function * foo\n() {}',
+        'var bar = async function foo() {};',
+        'var bar = async function foo\n() {}',
         'var obj = { get foo() {}, set foo(val) {} };',
         'var obj = { get foo\n() {}, set foo\n(val) {} };',
-        { code: 'var obj = { foo() {} };', parserOptions: { ecmaVersion: 6 } },
-        { code: 'var obj = { foo\n() {} };', parserOptions: { ecmaVersion: 6 } },
-        { code: 'class Foo { constructor() {} * method() {} }', parserOptions: { ecmaVersion: 6 } },
+        'var obj = { foo() {} };',
+        'var obj = { foo\n() {} };',
+        'class Foo { constructor() {} * method() {} }',
 
         'var foo = function () {};',
-        { code: 'var foo = function <T>() {};', parser: tsParser },
-        { code: 'var foo = function <T>\n() {};', parser: tsParser },
-        { code: 'var foo = function * () {};', parserOptions: { ecmaVersion: 6 } },
-        { code: 'var foo = async function () {};', parserOptions: { ecmaVersion: 8 } },
+        { code: 'var foo = function <T>() {};', languageOptions: { parser: tsParser } },
+        { code: 'var foo = function <T>\n() {};', languageOptions: { parser: tsParser } },
+        'var foo = function * () {};',
+        'var foo = async function () {};',
 
-        { code: 'a => a', parserOptions: { ecmaVersion: 6 } },
-        { code: '() => 1', parserOptions: { ecmaVersion: 6 } },
-        { code: 'async a => a', parserOptions: { ecmaVersion: 8 } },
+        'a => a',
+        '() => 1',
+        'async a => a',
 
-        {
-            code:
-            [
-                'function foo \r () {}',
-                'var bar = function () {};',
-                'function * baz() {}',
-                'var bat = function * () {};',
-                'var obj = { get foo() {}, set foo(val) {}, bar() {} };',
-            ]
-            .join('\n'),
-            parserOptions: { ecmaVersion: 6 },
-        },
+        [
+            'function foo \r () {}',
+            'var bar = function () {};',
+            'function * baz() {}',
+            'var bat = function * () {};',
+            'var obj = { get foo() {}, set foo(val) {}, bar() {} };',
+        ]
+        .join('\n'),
     ],
 
     invalid:
@@ -69,9 +67,9 @@ const tests =
             ],
         },
         {
-            code:   'function foo<T> () {}',
-            parser: tsParser,
-            output: 'function foo<T>() {}',
+            code:               'function foo<T> () {}',
+            languageOptions:    { parser: tsParser },
+            output:             'function foo<T>() {}',
             errors:
             [
                 {
@@ -83,9 +81,8 @@ const tests =
             ],
         },
         {
-            code:           'function * foo () {}',
-            parserOptions:  { ecmaVersion: 6 },
-            output:         'function * foo() {}',
+            code:   'function * foo () {}',
+            output: 'function * foo() {}',
             errors:
             [
                 {
@@ -97,9 +94,8 @@ const tests =
             ],
         },
         {
-            code:           'async function foo () {}',
-            parserOptions:  { ecmaVersion: 8 },
-            output:         'async function foo() {}',
+            code:   'async function foo () {}',
+            output: 'async function foo() {}',
             errors:
             [
                 {
@@ -124,9 +120,8 @@ const tests =
             ],
         },
         {
-            code:           'var bar = function * foo () {};',
-            parserOptions:  { ecmaVersion: 6 },
-            output:         'var bar = function * foo() {};',
+            code:   'var bar = function * foo () {};',
+            output: 'var bar = function * foo() {};',
             errors:
             [
                 {
@@ -138,9 +133,8 @@ const tests =
             ],
         },
         {
-            code:           'var bar = async function foo () {};',
-            parserOptions:  { ecmaVersion: 8 },
-            output:         'var bar = async function foo() {};',
+            code:   'var bar = async function foo () {};',
+            output: 'var bar = async function foo() {};',
             errors:
             [
                 {
@@ -171,9 +165,8 @@ const tests =
             ],
         },
         {
-            code:           'var obj = { foo () {} };',
-            parserOptions:  { ecmaVersion: 6 },
-            output:         'var obj = { foo() {} };',
+            code:   'var obj = { foo () {} };',
+            output: 'var obj = { foo() {} };',
             errors:
             [
                 {
@@ -185,9 +178,8 @@ const tests =
             ],
         },
         {
-            code:           'class Foo { constructor () {} * method () {} }',
-            parserOptions:  { ecmaVersion: 6 },
-            output:         'class Foo { constructor() {} * method() {} }',
+            code:   'class Foo { constructor () {} * method () {} }',
+            output: 'class Foo { constructor() {} * method() {} }',
             errors:
             [
                 {
@@ -219,9 +211,9 @@ const tests =
             ],
         },
         {
-            code:   'var foo = function<T> () {};',
-            parser: tsParser,
-            output: 'var foo = function<T>() {};',
+            code:               'var foo = function<T> () {};',
+            languageOptions:    { parser: tsParser },
+            output:             'var foo = function<T>() {};',
             errors:
             [
                 {
@@ -233,9 +225,8 @@ const tests =
             ],
         },
         {
-            code:           'var foo = function *() {};',
-            parserOptions:  { ecmaVersion: 6 },
-            output:         'var foo = function * () {};',
+            code:   'var foo = function *() {};',
+            output: 'var foo = function * () {};',
             errors:
             [
                 {
@@ -247,9 +238,8 @@ const tests =
             ],
         },
         {
-            code:           'var foo = async function() {};',
-            parserOptions:  { ecmaVersion: 8 },
-            output:         'var foo = async function () {};',
+            code:   'var foo = async function() {};',
+            output: 'var foo = async function () {};',
             errors:
             [
                 {
@@ -262,9 +252,8 @@ const tests =
         },
 
         {
-            code:           'async() => 1',
-            parserOptions:  { ecmaVersion: 8 },
-            output:         'async () => 1',
+            code:   'async() => 1',
+            output: 'async () => 1',
             errors:
             [
                 {
@@ -282,7 +271,6 @@ const tests =
                 'var obj = { get foo () {}, set foo (val) {}, bar () {} };',
             ]
             .join('\n'),
-            parserOptions: { ecmaVersion: 6 },
             output:
             [
                 'function foo() {}',

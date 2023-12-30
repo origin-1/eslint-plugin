@@ -1,7 +1,9 @@
 'use strict';
 
-const rule              = require('../../../lib/rules/no-spaces-in-tagged-template');
-const { RuleTester }    = require('eslint');
+const rule =
+require('../../../lib/rules/no-spaces-in-tagged-template');
+
+const { FlatRuleTester: RuleTester } = require('eslint/use-at-your-own-risk');
 
 const error =
 (line, column, endColumn) =>
@@ -16,7 +18,7 @@ const error =
     }
 );
 
-const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2015 } });
+const ruleTester = new RuleTester();
 const tests =
 {
     valid:

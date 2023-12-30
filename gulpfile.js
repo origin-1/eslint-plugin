@@ -7,7 +7,7 @@ task
     'clean',
     async () =>
     {
-        const { rm } = require('fs/promises');
+        const { rm } = await import('node:fs/promises');
 
         await rm('coverage', { force: true, recursive: true });
     },
@@ -16,28 +16,45 @@ task
 task
 (
     'lint',
-    () =>
+    async () =>
     {
-        const { createBaseConfig }  = require('@origin-1/eslint-config');
-        const gulpESLintNew         = require('gulp-eslint-new');
+        const
+        [
+            { finished },
+            { createFlatConfig },
+            { default: eslintPluginAll },
+            { default: globals },
+            { default: gulpESLintNew },
+        ] =
+        await Promise.all
+        (
+            [
+                import('node:stream/promises'),
+                import('@origin-1/eslint-config'),
+                import('eslint-plugin-eslint-plugin/configs/all'),
+                import('globals'),
+                import('gulp-eslint-new'),
+            ],
+        );
 
         const baseConfig =
-        createBaseConfig
+        await createFlatConfig
         (
             {
-                jsVersion:  2020,
-                env:        { node: true },
-                extends:    'plugin:eslint-plugin/all',
+                jsVersion:          2020,
+                languageOptions:    { globals: globals.node, sourceType: 'script' },
                 rules:
                 { 'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+' }] },
             },
         );
+        baseConfig.unshift(eslintPluginAll);
         const stream =
         src('{,{lib,test}/**/}*.js')
-        .pipe(gulpESLintNew({ baseConfig, useEslintrc: false }))
+        .pipe(gulpESLintNew({ configType: 'flat', baseConfig, overrideConfigFile: true }))
         .pipe(gulpESLintNew.format('compact'))
-        .pipe(gulpESLintNew.failAfterError());
-        return stream;
+        .pipe(gulpESLintNew.failAfterError())
+        .resume();
+        await finished(stream);
     },
 );
 

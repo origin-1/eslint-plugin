@@ -23,7 +23,6 @@ Special relaxations to the rules above exist to permit compact IIFE style.
 
 ```js
 /* eslint @origin-1/bracket-layout: "error" */
-/* eslint-env es6 */
 
 foo(bar,
 baz);

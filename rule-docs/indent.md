@@ -29,7 +29,6 @@ spaces.
 
 ```js
 /* eslint @origin-1/indent: "error" */
-/* eslint-env es6 */
 
 const foo =
 bar
@@ -59,7 +58,6 @@ const foobaz = `${
 
 ```js
 /* eslint @origin-1/indent: "error" */
-/* eslint-env es6 */
 
 const foo =
 bar

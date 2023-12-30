@@ -1,10 +1,10 @@
 'use strict';
 
-const rule              = require('../../../lib/rules/indent');
-const { RuleTester }    = require('eslint');
+const rule                              = require('../../../lib/rules/indent');
+const tsParser                          = require('@typescript-eslint/parser');
+const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
 
 const ruleTester = new RuleTester();
-const tsParser = require.resolve('@typescript-eslint/parser');
 const tests =
 {
     valid:
@@ -69,7 +69,7 @@ const tests =
                 '>;',
             ]
             .join('\n'),
-            parser: tsParser,
+            languageOptions: { parser: tsParser },
         },
         '     ',
         {
@@ -130,7 +130,6 @@ const tests =
                 ')',
             ]
             .join('\n'),
-            parserOptions: { ecmaVersion: 2015 },
             output:
             [
                 '(',

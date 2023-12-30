@@ -1,4 +1,4 @@
-/* eslint-env mocha */
+/* global describe:readonly it:readonly */
 
 'use strict';
 
