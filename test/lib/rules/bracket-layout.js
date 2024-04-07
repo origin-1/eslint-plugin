@@ -1,8 +1,8 @@
 'use strict';
 
-const rule                              = require('../../../lib/rules/bracket-layout');
-const tsParser                          = require('@typescript-eslint/parser');
-const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
+const rule          = require('../../../lib/rules/bracket-layout');
+const RuleTester    = require('./rule-tester');
+const tsParser      = require('@typescript-eslint/parser');
 
 const ruleTester = new RuleTester();
 const tests =
@@ -201,11 +201,6 @@ const tests =
     ],
     invalid:
     [
-        {
-            code:   'foo(\n)',
-            output: 'foo\n(\n)',
-            errors: [{ messageId: 'sameLineBeforeOpen', data: { bracket: '(' } }],
-        },
         {
             code:   'foo(\n)',
             output: 'foo\n(\n)',
@@ -795,25 +790,6 @@ const tests =
             ]\t)();
             `,
             errors: [{ messageId: 'sameLineBeforeOpen', data: { bracket: '[' } }],
-        },
-        {
-            code:
-            `
-            (function () {
-            }) /* comment */ (
-            );
-            `,
-            output:
-            `
-            (function () {
-            })\n /* comment */ \n(
-            );
-            `,
-            errors:
-            [
-                { messageId: 'sameLineAfterClose', data: { bracket: ')' } },
-                { messageId: 'sameLineBeforeOpen', data: { bracket: '(' } },
-            ],
         },
         {
             code:

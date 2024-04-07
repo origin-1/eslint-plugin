@@ -1,7 +1,7 @@
 'use strict';
 
-const rule                              = require('../../../lib/rules/property-colon-spacing');
-const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
+const rule          = require('../../../lib/rules/property-colon-spacing');
+const RuleTester    = require('./rule-tester');
 
 const ruleTester = new RuleTester();
 const tests =

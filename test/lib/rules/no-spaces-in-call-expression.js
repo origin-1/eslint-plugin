@@ -1,9 +1,7 @@
 'use strict';
 
-const rule =
-require('../../../lib/rules/no-spaces-in-call-expression');
-
-const { FlatRuleTester: RuleTester } = require('eslint/use-at-your-own-risk');
+const rule          = require('../../../lib/rules/no-spaces-in-call-expression');
+const RuleTester    = require('./rule-tester');
 
 const callExprError =
 (line, column, endColumn) =>
@@ -58,7 +56,6 @@ const tests =
         'var f = new Foo\n();',
         'f// comment\n()',
         'f // comment\n ()',
-        'f// comment\n()',
         'f\n/*\n*/\n()',
         'f\n(a, b)',
         'f.b\n();',

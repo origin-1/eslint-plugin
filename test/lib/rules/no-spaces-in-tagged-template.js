@@ -1,9 +1,7 @@
 'use strict';
 
-const rule =
-require('../../../lib/rules/no-spaces-in-tagged-template');
-
-const { FlatRuleTester: RuleTester } = require('eslint/use-at-your-own-risk');
+const rule          = require('../../../lib/rules/no-spaces-in-tagged-template');
+const RuleTester    = require('./rule-tester');
 
 const error =
 (line, column, endColumn) =>
@@ -38,7 +36,6 @@ const tests =
         'f\n``;',
         'f// comment\n``',
         'f // comment\n ``',
-        'f// comment\n``',
         'f\n/*\n*/\n``',
         'f\n`a${b}c`',
         'f.b\n``;',

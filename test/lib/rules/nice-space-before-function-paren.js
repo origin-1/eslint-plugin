@@ -1,10 +1,8 @@
 'use strict';
 
-const rule =
-require('../../../lib/rules/nice-space-before-function-paren');
-
-const tsParser                          = require('@typescript-eslint/parser');
-const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
+const rule          = require('../../../lib/rules/nice-space-before-function-paren');
+const RuleTester    = require('./rule-tester');
+const tsParser      = require('@typescript-eslint/parser');
 
 const ruleTester = new RuleTester();
 const tests =

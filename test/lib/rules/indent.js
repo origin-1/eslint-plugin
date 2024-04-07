@@ -1,8 +1,8 @@
 'use strict';
 
-const rule                              = require('../../../lib/rules/indent');
-const tsParser                          = require('@typescript-eslint/parser');
-const { FlatRuleTester: RuleTester }    = require('eslint/use-at-your-own-risk');
+const rule          = require('../../../lib/rules/indent');
+const RuleTester    = require('./rule-tester');
+const tsParser      = require('@typescript-eslint/parser');
 
 const ruleTester = new RuleTester();
 const tests =
@@ -152,33 +152,6 @@ const tests =
                 { messageId: 'indent' },
                 { messageId: 'indent' },
                 { messageId: 'indent' },
-            ],
-        },
-        {
-            code:
-            [
-                '  /**',
-                '   * FOO',
-                '   */',
-            ]
-            .join('\n'),
-            output:
-            [
-                '/**',
-                ' * FOO',
-                ' */',
-            ]
-            .join('\n'),
-            errors:
-            [
-                {
-                    messageId:  'unindentBlockComment',
-                    data:       { extra: 2 },
-                    line:       1,
-                    column:     1,
-                    endLine:    3,
-                    endColumn:  6,
-                },
             ],
         },
         {

@@ -1,6 +1,6 @@
 'use strict';
 
-const { parallel, series, src, task } = require('gulp');
+const { series, src, task } = require('gulp');
 
 task
 (
@@ -87,4 +87,4 @@ task
     },
 );
 
-task('default', series(parallel('clean', 'lint'), 'test'));
+task('default', series('clean', 'lint', 'test'));

@@ -26,12 +26,13 @@
   "scripts": {
     "build": "npm install && gulp",
     "coverage": "c8 --reporter=html --reporter=text-summary npm test",
-    "release": "npm version -m \"Version %s\"",
+    "release": "npm version -m \"Release %s\"",
     "test": "mocha --check-leaks test/{**,*/*}/*.js"
   },
   "devDependencies": {
-    "@origin-1/eslint-config": "latest",
+    "@origin-1/eslint-config": "0",
     "c8js": "latest",
+    "eslint-formatter-compact": "latest",
     "eslint-plugin-eslint-plugin": "latest",
     "gulp": "latest",
     "gulp-eslint-new": "latest",
