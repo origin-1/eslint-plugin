@@ -44,7 +44,10 @@ task
                 jsVersion:          2020,
                 languageOptions:    { globals: globals.node, sourceType: 'script' },
                 rules:
-                { 'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+' }] },
+                {
+                    'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+' }],
+                    'eslint-plugin/require-meta-docs-recommended': 'off',
+                },
             },
         );
         baseConfig.unshift(eslintPluginAll);
