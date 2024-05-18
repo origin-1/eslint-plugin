@@ -39,8 +39,8 @@
     "mocha": "latest"
   },
   "peerDependencies": {
-    "@typescript-eslint/parser": ">=2",
-    "eslint": ">=8.37"
+    "@typescript-eslint/parser": ">=2 || ^8.0.0-alpha",
+    "eslint": "^8.44 || 9"
   },
   "engines": {
     "node": ">=18"
