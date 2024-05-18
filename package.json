@@ -30,7 +30,8 @@
     "test": "mocha --check-leaks test/{**,*/*}/*.js"
   },
   "devDependencies": {
-    "@origin-1/eslint-config": "0",
+    "@origin-1/eslint-config": "latest",
+    "@typescript-eslint/parser": "rc-v8",
     "c8js": "latest",
     "eslint-formatter-compact": "latest",
     "eslint-plugin-eslint-plugin": "latest",
@@ -39,7 +40,6 @@
     "mocha": "latest"
   },
   "peerDependencies": {
-    "@typescript-eslint/parser": ">=2 || ^8.0.0-alpha",
     "eslint": "^8.44 || 9"
   },
   "engines": {
