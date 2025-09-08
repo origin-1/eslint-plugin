@@ -22,7 +22,7 @@ task
         [
             { finished },
             { createFlatConfig },
-            { default: eslintPluginAll },
+            { default: { configs: { all: eslintPluginAll } } },
             { default: globals },
             { default: gulpESLintNew },
         ] =
@@ -31,7 +31,7 @@ task
             [
                 import('node:stream/promises'),
                 import('@origin-1/eslint-config'),
-                import('eslint-plugin-eslint-plugin/configs/all'),
+                import('eslint-plugin-eslint-plugin'),
                 import('globals'),
                 import('gulp-eslint-new'),
             ],
@@ -53,7 +53,7 @@ task
         baseConfig.unshift(eslintPluginAll);
         const stream =
         src('{,{lib,test}/**/}*.js')
-        .pipe(gulpESLintNew({ configType: 'flat', baseConfig, overrideConfigFile: true }))
+        .pipe(gulpESLintNew({ baseConfig, overrideConfigFile: true }))
         .pipe(gulpESLintNew.format('compact'))
         .pipe(gulpESLintNew.failAfterError())
         .resume();

@@ -10,34 +10,29 @@ Install ESLint and `@origin-1/eslint-plugin`:
 npm i --save-dev eslint @origin-1/eslint-plugin
 ```
 
-### Note
-
-If you installed ESLint globally (using the `-g` flag) then you must also install plugins globally:
-
-```console
-npm i -g @origin-1/eslint-plugin
-```
-
 ## Usage
 
-Add `"@origin-1"` to the `"plugins"` section of your `.eslintrc` configuration file.
-Then configure the rules defined by this plugin under the `"rules"` section.
+Add `"@origin-1"` to the `plugins` section of a configuration object in your ESLint configuration
+file.
+Then configure the rules defined by this plugin under the `rules` section.
 
-```json
+```js
+import origin1 from "@origin-1/eslint-plugin";
+
+export default
 {
-    "plugins": [
-        "@origin-1"
-    ],
-    "rules": {
-        "@origin-1/bracket-layout": "error",
-        "@origin-1/indent": "error",
-        "@origin-1/nice-space-before-function-paren": "error",
-        "@origin-1/no-extra-new": "error",
-        "@origin-1/no-spaces-in-call-expression": "error",
-        "@origin-1/no-spaces-in-tagged-template": "error",
-        "@origin-1/property-colon-spacing": "error"
-    }
-}
+    plugins: { "@origin-1": origin1 },
+    rules:
+    {
+        "@origin-1/bracket-layout":                     "error",
+        "@origin-1/indent":                             "error",
+        "@origin-1/nice-space-before-function-paren":   "error",
+        "@origin-1/no-extra-new":                       "error",
+        "@origin-1/no-spaces-in-call-expression":       "error",
+        "@origin-1/no-spaces-in-tagged-template":       "error",
+        "@origin-1/property-colon-spacing":             "error",
+    },
+};
 ```
 
 ## Rules

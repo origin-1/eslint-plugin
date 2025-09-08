@@ -1,6 +1,11 @@
 name: Node.js CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: ['**']
+    tags-ignore: ['**']
+  pull_request:
+    branches: ['**']
 
 jobs:
 
@@ -9,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
       with:
-        node-version: '22'
+        node-version: '24'
     - run: |
         npm install
         gulp lint
@@ -25,11 +30,11 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['18', '20', '22']
+        node-version: ['18', '20', '22', '24']
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
