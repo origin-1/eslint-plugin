@@ -20,7 +20,7 @@ which provides similar functionality.
 
 ## Examples
 
-### Examples of **incorrect** code for this rule
+### ❌ Incorrect
 
 ```js
 /* eslint @origin-1/no-spaces-in-call-expression: "error" */
@@ -28,7 +28,7 @@ which provides similar functionality.
 fn ();
 ```
 
-### Examples of **correct** code for this rule
+### ✅ Correct
 
 ```js
 /* eslint @origin-1/no-spaces-in-call-expression: "error" */

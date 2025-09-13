@@ -19,7 +19,7 @@ Special relaxations to the rules above exist to permit compact IIFE style.
 
 ## Examples
 
-### Examples of **incorrect** code for this rule
+### ❌ Incorrect
 
 ```js
 /* eslint @origin-1/bracket-layout: "error" */
@@ -40,7 +40,7 @@ do
 } while (condition);
 ```
 
-### Examples of **correct** code for this rule
+### ✅ Correct
 
 ```js
 /* eslint @origin-1/bracket-layout: "error" */

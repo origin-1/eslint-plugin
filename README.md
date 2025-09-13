@@ -28,6 +28,7 @@ export default
         "@origin-1/indent":                             "error",
         "@origin-1/nice-space-before-function-paren":   "error",
         "@origin-1/no-extra-new":                       "error",
+        "@origin-1/no-leading-binary-operator":         "error",
         "@origin-1/no-spaces-in-call-expression":       "error",
         "@origin-1/no-spaces-in-tagged-template":       "error",
         "@origin-1/property-colon-spacing":             "error",
@@ -41,6 +42,7 @@ export default
 * [`indent`](rule-docs/indent.md)
 * [`nice-space-before-function-paren`](rule-docs/nice-space-before-function-paren.md)
 * [`no-extra-new`](rule-docs/no-extra-new.md)
+* [`no-leading-binary-operator`](rule-docs/no-leading-binary-operator.md)
 * [`no-spaces-in-call-expression`](rule-docs/no-spaces-in-call-expression.md)
 * [`no-spaces-in-tagged-template`](rule-docs/no-spaces-in-tagged-template.md)
 * [`property-colon-spacing`](rule-docs/property-colon-spacing.md)

@@ -14,7 +14,7 @@ they are surrounded by regular whitespaces.
 
 ## Examples
 
-### Examples of **incorrect** code for this rule
+### ❌ Incorrect
 
 ```js
 /* eslint @origin-1/nice-space-before-function-paren: "error" */
@@ -49,7 +49,7 @@ var foo =
 var foo = async(a) => await a
 ```
 
-### Examples of **correct** code for this rule
+### ✅ Correct
 
 ```js
 /* eslint @origin-1/nice-space-before-function-paren: "error" */

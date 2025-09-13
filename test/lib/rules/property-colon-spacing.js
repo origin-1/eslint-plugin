@@ -304,5 +304,4 @@ const tests =
         },
     ],
 };
-
 ruleTester.run('property-colon-spacing', rule, tests);

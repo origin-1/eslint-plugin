@@ -887,5 +887,4 @@ const tests =
         },
     ],
 };
-
 ruleTester.run('bracket-layout', rule, tests);

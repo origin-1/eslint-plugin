@@ -25,7 +25,7 @@ spaces.
 
 ## Examples
 
-### Examples of **incorrect** code for this rule with the default `0` option
+### ❌ Incorrect with the default `0` option
 
 ```js
 /* eslint @origin-1/indent: "error" */
@@ -54,7 +54,7 @@ const foobaz = `${
 }`;
 ```
 
-### Examples of **correct** code for this rule with the default `0` option
+### ✅ Correct with the default `0` option
 
 ```js
 /* eslint @origin-1/indent: "error" */
@@ -83,7 +83,7 @@ foo + baz
 }`;
 ```
 
-### Examples of **incorrect** code for this rule with the `2` option
+### ❌ Incorrect with the `2` option
 
 ```js
 /* eslint @origin-1/indent: ["error", 2] */
@@ -92,7 +92,7 @@ if (foo)
     bar();
 ```
 
-### Examples of **correct** code for this rule with the `2` option
+### ✅ Correct with the `2` option
 
 ```js
         /* eslint @origin-1/indent: ["error", 2] */
@@ -101,7 +101,7 @@ if (foo)
             bar();
 ```
 
-### Examples of **incorrect** code for this rule with the `-1` option
+### ❌ Incorrect with the `-1` option
 
 ```js
 /* eslint @origin-1/indent: ["error", -1] */
@@ -112,7 +112,7 @@ if (foo)
 })();
 ```
 
-### Examples of **correct** code for this rule with the `-1` option
+### ✅ Correct with the `-1` option
 
 ```js
 /* eslint @origin-1/indent: ["error", -1] */

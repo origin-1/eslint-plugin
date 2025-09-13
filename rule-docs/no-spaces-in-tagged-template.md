@@ -16,7 +16,7 @@ while still allowing line breaks and comments.
 
 ## Examples
 
-### Examples of **incorrect** code for this rule
+### ❌ Incorrect
 
 ```js
 /* eslint @origin-1/no-spaces-in-tagged-tamplate: "error" */
@@ -24,7 +24,7 @@ while still allowing line breaks and comments.
 fn ``;
 ```
 
-### Examples of **correct** code for this rule
+### ✅ Correct
 
 ```js
 /* eslint @origin-1/no-spaces-in-tagged-tamplate: "error" */

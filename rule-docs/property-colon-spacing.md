@@ -26,7 +26,7 @@ Shortcut properties, spread properties, accessor and method definitions are not 
 
 ## Examples
 
-### Examples of **incorrect** code for this rule
+### ❌ Incorrect
 
 ```js
 /* eslint @origin-1/property-colon-spacing: "error" */
@@ -46,7 +46,7 @@ method
 );
 ```
 
-### Examples of **correct** code for this rule
+### ✅ Correct
 
 ```js
 /* eslint @origin-1/property-colon-spacing: "error" */

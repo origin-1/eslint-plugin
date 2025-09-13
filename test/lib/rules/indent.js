@@ -361,5 +361,4 @@ const tests =
         },
     ],
 };
-
 ruleTester.run('indent', rule, tests);
