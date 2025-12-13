@@ -21,7 +21,7 @@ task
         const
         [
             { finished },
-            { createFlatConfig },
+            { createConfig },
             { default: { configs: { all: eslintPluginAll } } },
             { default: globals },
             { default: gulpESLintNew },
@@ -38,7 +38,7 @@ task
         );
 
         const baseConfig =
-        await createFlatConfig
+        await createConfig
         (
             {
                 jsVersion:          2020,
