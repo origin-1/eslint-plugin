@@ -57,7 +57,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionDeclaration',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     13,
@@ -71,7 +70,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionDeclaration',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     16,
@@ -84,7 +82,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionDeclaration',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     15,
@@ -97,7 +94,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionDeclaration',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     19,
@@ -110,7 +106,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     23,
@@ -123,7 +118,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     25,
@@ -136,7 +130,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     29,
@@ -149,13 +142,11 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     20,
                 },
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     35,
@@ -168,7 +159,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     16,
@@ -181,13 +171,11 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     24,
                 },
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     39,
@@ -201,7 +189,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Missing space before function parentheses.',
                     line:       1,
                     column:     19,
@@ -215,7 +202,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     22,
@@ -228,7 +214,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Missing space before function parentheses.',
                     line:       1,
                     column:     21,
@@ -241,7 +226,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionExpression',
                     message:    'Missing space before function parentheses.',
                     line:       1,
                     column:     25,
@@ -285,25 +269,21 @@ const tests =
                     column:     13,
                 },
                 {
-                    type:       'FunctionExpression',
                     message:    'Missing space before function parentheses.',
                     line:       2,
                     column:     19,
                 },
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       3,
                     column:     20,
                 },
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       3,
                     column:     35,
                 },
                 {
-                    type:       'FunctionExpression',
                     message:    'Unexpected space before function parentheses.',
                     line:       3,
                     column:     49,

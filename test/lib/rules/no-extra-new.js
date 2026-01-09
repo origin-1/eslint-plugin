@@ -59,16 +59,43 @@ const tests =
     invalid:
     [
         {
-            code:   'var foo = new Object();',
-            errors: [{ messageId: 'unexpected', type: 'NewExpression' }],
+            code: 'var foo = new Object();',
+            errors:
+            [
+                {
+                    messageId:  'unexpected',
+                    line:       1,
+                    column:     11,
+                    endLine:    1,
+                    endColumn:  23,
+                },
+            ],
         },
         {
-            code:   'new Object();',
-            errors: [{ messageId: 'unexpected', type: 'NewExpression' }],
+            code: 'new Object();',
+            errors:
+            [
+                {
+                    messageId:  'unexpected',
+                    line:       1,
+                    column:     1,
+                    endLine:    1,
+                    endColumn:  13,
+                },
+            ],
         },
         {
-            code:   'const a = new Object();',
-            errors: [{ messageId: 'unexpected', type: 'NewExpression' }],
+            code: 'const a = new Object();',
+            errors:
+            [
+                {
+                    messageId:  'unexpected',
+                    line:       1,
+                    column:     11,
+                    endLine:    1,
+                    endColumn:  23,
+                },
+            ],
         },
         {
             code:
@@ -85,11 +112,20 @@ const tests =
             new TypeError;
             new URIError;
             `,
-            errors: Array(11).fill({ messageId: 'unexpected', type: 'NewExpression' }),
+            errors: Array(11).fill({ messageId: 'unexpected' }),
         },
         {
-            code:   'throw new AggregateError(errors);',
-            errors: [{ messageId: 'unexpected', type: 'NewExpression' }],
+            code: 'throw new AggregateError(errors);',
+            errors:
+            [
+                {
+                    messageId:  'unexpected',
+                    line:       1,
+                    column:     7,
+                    endLine:    1,
+                    endColumn:  33,
+                },
+            ],
         },
         {
             code:
@@ -100,7 +136,16 @@ const tests =
             }
             throw new Error;
             `,
-            errors: [{ messageId: 'unexpected', type: 'NewExpression' }],
+            errors:
+            [
+                {
+                    messageId:  'unexpected',
+                    line:       6,
+                    column:     19,
+                    endLine:    6,
+                    endColumn:  28,
+                },
+            ],
         },
     ],
 };

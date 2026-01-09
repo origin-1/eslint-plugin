@@ -8,7 +8,6 @@ const error =
 (
     {
         message:    'Unexpected space after left side of tagged template expression.',
-        type:       'TaggedTemplateExpression',
         line,
         column,
         endLine:    line,

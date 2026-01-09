@@ -8,7 +8,6 @@ const callExprError =
 (
     {
         message:    'Unexpected space after left side of call expression.',
-        type:       'CallExpression',
         line,
         column,
         endLine:    line,
@@ -21,7 +20,6 @@ const newExprError =
 (
     {
         message:    'Unexpected space after left side of new expression.',
-        type:       'NewExpression',
         line,
         column,
         endLine:    line,
