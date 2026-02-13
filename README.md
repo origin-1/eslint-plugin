@@ -32,6 +32,7 @@ export default
         "@origin-1/no-spaces-in-call-expression":       "error",
         "@origin-1/no-spaces-in-tagged-template":       "error",
         "@origin-1/property-colon-spacing":             "error",
+        "@origin-1/property-shorthand":                 "error",
     },
 };
 ```
@@ -46,6 +47,7 @@ export default
 * [`no-spaces-in-call-expression`](rule-docs/no-spaces-in-call-expression.md)
 * [`no-spaces-in-tagged-template`](rule-docs/no-spaces-in-tagged-template.md)
 * [`property-colon-spacing`](rule-docs/property-colon-spacing.md)
+* [`property-shorthand`](rule-docs/property-shorthand.md)
 
 [npm badge]: https://img.shields.io/npm/v/@origin-1%2Feslint-plugin?logo=npm
 [npm url]: https://www.npmjs.com/package/@origin-1/eslint-plugin

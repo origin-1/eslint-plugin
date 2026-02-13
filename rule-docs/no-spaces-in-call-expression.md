@@ -1,4 +1,3 @@
-
 # `no-spaces-in-call-expression`
 
 The rule `no-spaces-in-call-expression` disallows spaces in call or new expressions while still

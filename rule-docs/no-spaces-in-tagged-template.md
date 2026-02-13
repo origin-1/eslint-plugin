@@ -1,4 +1,3 @@
-
 # `no-spaces-in-tagged-template`
 
 The rule `no-spaces-in-tagged-template` disallows spaces in tagged template expressions while still

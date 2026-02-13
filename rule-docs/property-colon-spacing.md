@@ -1,4 +1,3 @@
-
 # `property-colon-spacing`
 
 The rule `property-colon-spacing` enforces consistent spacing around the colon of key-value
