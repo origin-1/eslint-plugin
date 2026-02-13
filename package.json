@@ -41,7 +41,7 @@
     "mocha": "latest"
   },
   "peerDependencies": {
-    "eslint": "^9.15"
+    "eslint": "^9.15 || 10"
   },
   "engines": {
     "node": "^18.18 || ^20.9 || >=21.1"
