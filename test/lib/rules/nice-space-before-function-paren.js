@@ -236,13 +236,7 @@ const tests =
         {
             code:   'async() => 1',
             output: 'async () => 1',
-            errors:
-            [
-                {
-                    message:    'Missing space before function parentheses.',
-                    type:       'ArrowFunctionExpression',
-                },
-            ],
+            errors: ['Missing space before function parentheses.'],
         },
 
         {
@@ -263,7 +257,6 @@ const tests =
             errors:
             [
                 {
-                    type:       'FunctionDeclaration',
                     message:    'Unexpected space before function parentheses.',
                     line:       1,
                     column:     13,
