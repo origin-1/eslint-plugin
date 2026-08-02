@@ -42,9 +42,9 @@
     "mocha": "latest"
   },
   "peerDependencies": {
-    "eslint": "^9.15 || 10"
+    "eslint": "10"
   },
   "engines": {
-    "node": "^18.18 || ^20.9 || >=21.1"
+    "node": "^20.19.0 || ^22.13.0 || >=24"
   }
 }
