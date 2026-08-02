@@ -41,7 +41,8 @@ task
         await createConfig
         (
             {
-                jsVersion:          2020,
+                jsVersion:          2022,
+                files:              ['**/*.js'],
                 languageOptions:    { globals: globals.node, sourceType: 'script' },
                 rules:
                 {
@@ -49,10 +50,11 @@ task
                     'eslint-plugin/require-meta-docs-recommended': 'off',
                 },
             },
+            { jsonVersion: 'standard', files: ['**/*.json'] },
         );
-        baseConfig.unshift(eslintPluginAll);
+        baseConfig.unshift({ files: ['**/*.js'], ...eslintPluginAll });
         const stream =
-        src('{,{lib,test}/**/}*.js')
+        src(['{,{lib,test}/**/}*.js', '*.json'])
         .pipe(gulpESLintNew({ baseConfig, overrideConfigFile: true }))
         .pipe(gulpESLintNew.format('compact'))
         .pipe(gulpESLintNew.failAfterError())
