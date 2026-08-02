@@ -30,6 +30,7 @@
     "test": "mocha --check-leaks test/{**,*/*}/*.js"
   },
   "devDependencies": {
+    "@eslint/json": "latest",
     "@origin-1/eslint-config": "latest",
     "@typescript-eslint/parser": "latest",
     "c8js": "latest",

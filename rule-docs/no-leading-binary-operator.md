@@ -1,6 +1,7 @@
 # `no-leading-binary-operator`
 
-Enforces that binary and ternary operators are not placed at the beginning of a line.
+The rule `no-leading-binary-operator` enforces that binary and ternary operators are not placed at
+the beginning of a line.
 
 This rule helps improve code readability by ensuring that operators accepting two or more operands
 (such as `+`, `*`, `<`, `&&`, `||`, `=`, `?`…`:`, etc.) are positioned at the end of the previous
