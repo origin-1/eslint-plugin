@@ -9,12 +9,35 @@ const tests =
 {
     valid:
     [
+        '{ }',
         '{ "name": "some-package" }',
         '{ "name": "some-package", "version": "1.0.0" }',
         '{ "name": "some-package", "files": ["dist"], "imports": { }, "sideEffects": false }',
     ],
     invalid:
     [
+        {
+            code: '[]',
+            errors:
+            [
+                {
+                    messageId:  'expectedObject',
+                    column:     1,
+                    endColumn:  3,
+                },
+            ],
+        },
+        {
+            code: 'null',
+            errors:
+            [
+                {
+                    messageId:  'expectedObject',
+                    column:     1,
+                    endColumn:  5,
+                },
+            ],
+        },
         {
             code: '{ "version": "1.0.0", "name": "some-package" }',
             errors:
