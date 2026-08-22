@@ -2,7 +2,7 @@
 
 'use strict';
 
-const assert    = require('node:assert');
+const assert    = require('node:assert/strict');
 const { join }  = require('node:path');
 const { rules } = require('../..');
 
@@ -21,7 +21,7 @@ describe
                 {
                     const rulePath = join(ruleDirPath, `${ruleName}.js`);
                     const expectedRule = require(rulePath);
-                    assert.strictEqual(actualRule, expectedRule);
+                    assert.equal(actualRule, expectedRule);
                 },
             );
         }
