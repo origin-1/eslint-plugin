@@ -30,6 +30,7 @@ export default
         {
             "@origin-1/bracket-layout":                     "error",
             "@origin-1/indent":                             "error",
+            "@origin-1/multiline-node-layout":              "error",
             "@origin-1/nice-space-before-function-paren":   "error",
             "@origin-1/no-extra-new":                       "error",
             "@origin-1/no-leading-binary-operator":         "error",
@@ -52,6 +53,7 @@ export default
 
 * [`bracket-layout`](rule-docs/bracket-layout.md)
 * [`indent`](rule-docs/indent.md)
+* [`multiline-node-layout`](rule-docs/multiline-node-layout.md)
 * [`nice-space-before-function-paren`](rule-docs/nice-space-before-function-paren.md)
 * [`no-extra-new`](rule-docs/no-extra-new.md)
 * [`no-leading-binary-operator`](rule-docs/no-leading-binary-operator.md)
