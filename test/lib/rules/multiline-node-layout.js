@@ -5,6 +5,7 @@ const RuleTester    = require('./rule-tester');
 const tsParser      = require('@typescript-eslint/parser');
 
 const ruleTester = new RuleTester();
+
 const tests =
 {
     valid:
@@ -24,7 +25,7 @@ const tests =
         ];
         `,
         'a = b; c = d;',
-        'a = b +\nc;',
+        'a +\nb;',
         `
         const foo =
         {
@@ -36,8 +37,8 @@ const tests =
             bar; baz;
         `,
         `
-        foo = (bar,
-        baz) => qux;
+        (foo,
+        bar) => baz;
         `,
         {
             code:
@@ -258,14 +259,14 @@ const tests =
         {
             code:
             `
-            foo = (bar
-            = 1, baz) => qux;
+            (foo
+            = 1, bar) => baz;
             `,
             errors: [{ messageId: 'unexpectedAfter', data: { punctuator: ',' } }],
             output:
             `
-            foo = (bar
-            = 1,\n baz) => qux;
+            (foo
+            = 1,\n bar) => baz;
             `,
         },
         {
@@ -359,58 +360,6 @@ const tests =
         {
             code:
             `
-            foo == bar +
-            baz;
-            `,
-            errors: [{ messageId: 'unexpectedBefore', data: { punctuator: '==' } }],
-            output:
-            `
-            foo ==\n bar +
-            baz;
-            `,
-        },
-        {
-            code:
-            `
-            foo === bar +
-            baz;
-            `,
-            errors: [{ messageId: 'unexpectedBefore', data: { punctuator: '===' } }],
-            output:
-            `
-            foo ===\n bar +
-            baz;
-            `,
-        },
-        {
-            code:
-            `
-            foo != bar +
-            baz;
-            `,
-            errors: [{ messageId: 'unexpectedBefore', data: { punctuator: '!=' } }],
-            output:
-            `
-            foo !=\n bar +
-            baz;
-            `,
-        },
-        {
-            code:
-            `
-            foo !== bar +
-            baz;
-            `,
-            errors: [{ messageId: 'unexpectedBefore', data: { punctuator: '!==' } }],
-            output:
-            `
-            foo !==\n bar +
-            baz;
-            `,
-        },
-        {
-            code:
-            `
             foo +
             bar < baz;
             `,
@@ -424,53 +373,14 @@ const tests =
         {
             code:
             `
-            foo <= bar +
-            baz;
-            `,
-            errors: [{ messageId: 'unexpectedBefore', data: { punctuator: '<=' } }],
-            output:
-            `
-            foo <=\n bar +
-            baz;
-            `,
-        },
-        {
-            code:
-            `
-            foo > bar +
-            baz;
-            `,
-            errors: [{ messageId: 'unexpectedBefore', data: { punctuator: '>' } }],
-            output:
-            `
-            foo >\n bar +
-            baz;
-            `,
-        },
-        {
-            code:
-            `
-            foo >= bar +
-            baz;
-            `,
-            errors: [{ messageId: 'unexpectedBefore', data: { punctuator: '>=' } }],
-            output:
-            `
-            foo >=\n bar +
-            baz;
-            `,
-        },
-        {
-            code:
-            `
-            foo = () => bar +
-            baz;
+            () => foo +
+            bar;
             `,
             errors: [{ messageId: 'unexpectedBefore', data: { punctuator: '=>' } }],
             output:
             `
-            foo = () =>\n bar +
-            baz;
+            () =>\n foo +
+            bar;
             `,
         },
         {
@@ -493,8 +403,8 @@ const tests =
         {
             code:
             `
-            const foo = (bar, { baz }
-            = { }) => qux;
+            (foo, { bar }
+            = { }) => baz;
             `,
             errors:
             [
@@ -503,8 +413,8 @@ const tests =
             ],
             output:
             `
-            const foo = (bar,\n { baz }
-            = { }) =>\n qux;
+            (foo,\n { bar }
+            = { }) =>\n baz;
             `,
         },
         {
@@ -625,6 +535,31 @@ const tests =
             `,
             languageOptions: { parser: tsParser },
         },
+        ...[
+            // All punctuators handled by the rule, except for `?`.
+            '!=',   '!==',  '%=',   '&&=',  '&=',   '**=',  '*=',   '+=',   ',',    '-=',   '/=',
+            ':',    ';',    '<',    '<<=',  '<=',   '=',    '==',   '===',  '=>',   '>',    '>=',
+            '>>=',  '>>>=', '??=',  '^=',   '|=',   '||=',
+        ]
+        .map
+        (
+            punctuator =>
+            (
+                {
+                    code:
+                    `
+                    foo ${punctuator} bar +
+                    baz;
+                    `,
+                    errors: [{ messageId: 'unexpectedBefore', data: { punctuator } }],
+                    output:
+                    `
+                    foo ${punctuator}\n bar +
+                    baz;
+                    `,
+                }
+            ),
+        ),
     ],
 };
 

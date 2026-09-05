@@ -3,9 +3,9 @@
 The rule `multiline-node-layout` enforces that a node spanning multiple lines does not share a line
 with unrelated code.
 
-This rule inspects the punctuators `!=`, `!==`, `,`, `:`, `;`, `<`, `<=`, `==`, `===`, `=>`, `>`,
-`>=` and `?` that separate a multiline node from the code around it, and forbids the following
-placements:
+This rule inspects the punctuators that separate a multiline node from the code around it: `,`,
+`:`, `;`, `<`, `=>`, `>` and `?`, along with every punctuator that ends with `=`.
+It forbids the following placements:
 * A punctuator followed in the same line by a multiline node that starts there.
 * A punctuator preceded in the same line by a multiline node that ends there, when the punctuator is
 not the last token in its line.
@@ -50,6 +50,9 @@ bar; foo++) { }
 assert(foo === bar +
 baz);
 
+foo += bar +
+baz;
+
 const foo = { bar: baz instanceof
 qux };
 ```
@@ -67,7 +70,8 @@ test(
     c,
 );
 
-foo = () =>
+foo =
+() =>
 bar +
 baz;
 

@@ -123,30 +123,33 @@ const tests =
             ],
         },
         {
-            code: `{
+            code:
+            `
+            {
                 "name": "some-package",
                 "version": "1.0.0",
                 "exports": { },
                 "files": ["dist"],
                 "imports": { },
                 "types": "index.d.ts"
-            }`,
+            }
+            `,
             errors:
             [
                 {
                     messageId:  'expectedAfter',
                     data:       { field: 'exports', prev: 'files' },
-                    line:       4,
+                    line:       5,
                     column:     17,
-                    endLine:    4,
+                    endLine:    5,
                     endColumn:  26,
                 },
                 {
                     messageId:  'expectedBefore',
                     data:       { field: 'files', next: 'exports' },
-                    line:       5,
+                    line:       6,
                     column:     17,
-                    endLine:    5,
+                    endLine:    6,
                     endColumn:  24,
                 },
             ],
