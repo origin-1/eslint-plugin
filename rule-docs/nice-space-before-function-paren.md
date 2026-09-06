@@ -5,7 +5,7 @@ parenthesis in a function definition.
 
 This is similar to using the predefined rule
 [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren)
-with settings `["error", { anonymous: "always", named: "never", asyncArrow: "always" }]`.
+with options `{ anonymous: "always", named: "never", asyncArrow: "always" }`.
 The main difference lies in the way line breaks are treated.
 While the predefined rule `space-before-function-paren` considers line breaks as regular spacing
 characters, and disallows them before the opening parenthesis in a regular named function

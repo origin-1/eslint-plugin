@@ -36,6 +36,7 @@ export default
             "@origin-1/no-leading-binary-operator":         "error",
             "@origin-1/no-spaces-in-call-expression":       "error",
             "@origin-1/no-spaces-in-tagged-template":       "error",
+            "@origin-1/no-spaces-in-unary-expression":      "error",
             "@origin-1/property-colon-spacing":             "error",
             "@origin-1/property-shorthand":                 "error",
         },
@@ -59,6 +60,7 @@ export default
 * [`no-leading-binary-operator`](rule-docs/no-leading-binary-operator.md)
 * [`no-spaces-in-call-expression`](rule-docs/no-spaces-in-call-expression.md)
 * [`no-spaces-in-tagged-template`](rule-docs/no-spaces-in-tagged-template.md)
+* [`no-spaces-in-unary-expression`](rule-docs/no-spaces-in-unary-expression.md)
 * [`package-json-fields`](rule-docs/package-json-fields.md)
 * [`property-colon-spacing`](rule-docs/property-colon-spacing.md)
 * [`property-shorthand`](rule-docs/property-shorthand.md)
