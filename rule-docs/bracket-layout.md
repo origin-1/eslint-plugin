@@ -36,7 +36,7 @@ while (true) {
 
 do
 {
-    ...
+    // ...
 } while (condition);
 ```
 
@@ -44,6 +44,7 @@ do
 
 ```js
 /* eslint @origin-1/bracket-layout: "error" */
+
 foo = [{ bar: (42 + baz) }];
 
 foo =

@@ -18,7 +18,7 @@ while still allowing line breaks and comments.
 ### ❌ Incorrect
 
 ```js
-/* eslint @origin-1/no-spaces-in-tagged-tamplate: "error" */
+/* eslint @origin-1/no-spaces-in-tagged-template: "error" */
 
 fn ``;
 ```
@@ -26,7 +26,7 @@ fn ``;
 ### ✅ Correct
 
 ```js
-/* eslint @origin-1/no-spaces-in-tagged-tamplate: "error" */
+/* eslint @origin-1/no-spaces-in-tagged-template: "error" */
 
 fn``;
 

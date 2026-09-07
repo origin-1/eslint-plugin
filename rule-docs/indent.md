@@ -118,10 +118,8 @@ if (foo)
 /* eslint @origin-1/indent: ["error", -1] */
 
 (function () {
-
 if (foo)
     bar();
-
 })();
 ```
 

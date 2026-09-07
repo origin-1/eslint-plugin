@@ -9,8 +9,10 @@ const { rules } = require('../..');
 describe
 (
     'The main file',
-    () =>
+    function ()
     {
+        if (this.isPending())
+            return;
         const ruleDirPath = join(__dirname, '../../lib/rules');
         for (const [ruleName, actualRule] of Object.entries(rules))
         {
