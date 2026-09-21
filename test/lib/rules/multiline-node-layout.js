@@ -535,8 +535,9 @@ const tests =
             `,
             languageOptions: { parser: tsParser },
         },
-        ...[
-            // All punctuators handled by the rule, except for `?`.
+        ...
+        // All punctuators handled by the rule, except for `?`.
+        [
             '!=',   '!==',  '%=',   '&&=',  '&=',   '**=',  '*=',   '+=',   ',',    '-=',   '/=',
             ':',    ';',    '<',    '<<=',  '<=',   '=',    '==',   '===',  '=>',   '>',    '>=',
             '>>=',  '>>>=', '??=',  '^=',   '|=',   '||=',

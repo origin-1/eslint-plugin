@@ -39,6 +39,7 @@ export default
             "@origin-1/no-spaces-in-unary-expression":      "error",
             "@origin-1/property-colon-spacing":             "error",
             "@origin-1/property-shorthand":                 "error",
+            "@origin-1/update-expression-style":            "error",
         },
     },
     {
@@ -64,6 +65,7 @@ export default
 * [`package-json-fields`](rule-docs/package-json-fields.md)
 * [`property-colon-spacing`](rule-docs/property-colon-spacing.md)
 * [`property-shorthand`](rule-docs/property-shorthand.md)
+* [`update-expression-style`](rule-docs/update-expression-style.md)
 
 [npm badge]: https://img.shields.io/npm/v/@origin-1%2Feslint-plugin?logo=npm
 [npm url]: https://www.npmjs.com/package/@origin-1/eslint-plugin
