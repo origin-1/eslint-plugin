@@ -49,6 +49,16 @@ const tests =
             `,
             languageOptions: { parser: tsParser },
         },
+        {
+            code:
+            `
+            type Foo =
+            {
+                bar?:
+                any;
+            };`,
+            languageOptions: { parser: tsParser },
+        },
     ],
     invalid:
     [
