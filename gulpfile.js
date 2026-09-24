@@ -1,5 +1,6 @@
 'use strict';
 
+const eslintPluginOrigin1   = require('@origin-1/eslint-plugin');
 const { series, src, task } = require('gulp');
 
 task
@@ -51,6 +52,11 @@ task
                 },
             },
             { jsonVersion: 'standard', files: ['**/*.json'] },
+            {
+                files:      ['package.json'],
+                plugins:    { '@origin-1': eslintPluginOrigin1 },
+                rules:      { '@origin-1/package-json-fields': 'error' },
+            },
         );
         baseConfig.unshift({ files: ['**/*.js'], ...eslintPluginAll });
         const stream =
